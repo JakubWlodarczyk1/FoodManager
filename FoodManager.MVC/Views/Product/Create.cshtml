@@ -1,0 +1,66 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using FoodManager.Application.Product.Commands.CreateProduct
+@using FoodManager.Domain.Enums
+
+@model CreateProductCommand
+
+<h1>Dodaj produkt</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-antiforgery="true">
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Name">Nazwa</label>
+                <input class="form-control" type="text" asp-for="Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Description">Opis</label>
+                <textarea class="form-control" type="text" asp-for="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Category">Kategoria</label>
+                <input class="form-control" type="text" asp-for="Category" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Quantity">Ilość</label>
+                <div class="input-group">
+                    <input class="form-control" type="number" asp-for="Quantity" step="any" min="1" max="10000" inputmode="numeric" />
+                    <span>
+                        <select class="form-select" asp-for="Unit" asp-items="Html.GetEnumSelectList<Unit>()"></select>
+                    </span>
+                </div>
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="Price">Cena</label>
+                <div class="input-group">
+                    <input class="form-control" type="number" asp-for="Price" data-val-number="" step="any" min="0" max="10000" inputmode="numeric" />
+                    <span class="input-group-text">PLN</span>
+                </div>
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="control-label" asp-for="ExpirationDate">Data ważności</label>
+                <input class="form-control" type="date" asp-for="ExpirationDate" />
+                <span asp-validation-for="ExpirationDate" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mb-3">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+       await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
