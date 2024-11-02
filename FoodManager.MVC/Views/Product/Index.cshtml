@@ -1,15 +1,17 @@
-﻿@using FoodManager.Application.Product
+﻿@using FoodManager.Application.Extensions
+@using FoodManager.Application.Product
+@using FoodManager.Application.Resources.Localizations
 
 @model IEnumerable<ProductDto>
 
 @{
-    ViewData["Title"] = "Produkty";
+    ViewData["Title"] = @Lang.Products;
 }
 
-<h1>Produkty</h1>
+<h1>@Lang.Products</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">Dodaj nowy</a>
+    <a class="btn btn-primary" asp-action="Create">@Lang.AddProduct</a>
 </p>
 <table class="table">
     <thead>
@@ -21,7 +23,7 @@
             <th>@Html.DisplayNameFor(model => model.Unit)</th>
             <th>@Html.DisplayNameFor(model => model.Price) (PLN)</th>
             <th>@Html.DisplayNameFor(model => model.ExpirationDate)</th>
-            <th>Akcje</th>
+            <th>@Lang.Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -31,12 +33,12 @@
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@Html.DisplayFor(modelItem => item.Category)</td>
             <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-            <td>@Html.DisplayFor(modelItem => item.Unit)</td>
+            <td>@item.Unit.GetDisplayName()</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td>@item.ExpirationDate.ToString("dd-MM-yyyy")</td>
             <td>
-                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Czy na pewno chcesz usunąć produkt?')">Usuń</a>
+                <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.Id">@Lang.Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">@Lang.Delete</a>
             </td>
         </tr>
 }

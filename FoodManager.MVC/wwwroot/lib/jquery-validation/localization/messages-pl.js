@@ -18,6 +18,5 @@ $.extend($.validator.messages, {
 	max: $.validator.format("Proszę o wprowadzenie wartości mniejszej bądź równej {0}."),
 	range: $.validator.format("Proszę o wprowadzenie wartości z przedziału od {0} do {1}."),
     rangelength: $.validator.format("Proszę o wprowadzenie wartości o długości od {0} do {1} znaków."),
-	pattern: $.validator.format("Pole zawiera niedozwolone znaki."),
     step: $.validator.format("Proszę o wprowadzenie wielokrotności {0}.")
 } );

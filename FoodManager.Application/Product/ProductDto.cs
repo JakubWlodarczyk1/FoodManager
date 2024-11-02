@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
+using FoodManager.Application.Resources.Localizations;
 using FoodManager.Domain.Enums;
 
 namespace FoodManager.Application.Product
@@ -7,25 +8,25 @@ namespace FoodManager.Application.Product
     {
         public int Id { get; set; }
 
-        [DisplayName("Nazwa")]
+        [Display(Name = "Name", ResourceType = typeof(Lang))]
         public required string Name { get; set; }
 
-        [DisplayName("Opis")]
+        [Display(Name = "Description", ResourceType = typeof(Lang))]
         public string? Description { get; set; }
 
-        [DisplayName("Kategoria")]
+        [Display(Name = "Category", ResourceType = typeof(Lang))]
         public string? Category { get; set; }
 
-        [DisplayName("Ilość")]
+        [Display(Name = "Quantity", ResourceType = typeof(Lang))]
         public int Quantity { get; set; }
 
-        [DisplayName("Jednostka")]
+        [Display(Name = "Unit", ResourceType = typeof(Lang))]
         public Unit Unit { get; set; }
 
-        [DisplayName("Cena")]
+        [Display(Name = "Price", ResourceType = typeof(Lang))]
         public decimal Price { get; set; }
 
-        [DisplayName("Data ważności")]
+        [Display(Name = "ExpirationDate", ResourceType = typeof(Lang))]
         public DateTime ExpirationDate { get; set; }
     }
 }

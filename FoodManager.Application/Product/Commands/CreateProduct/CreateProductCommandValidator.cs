@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FoodManager.Application.Extensions;
+using FoodManager.Application.Resources.Localizations;
 using FoodManager.Domain.Interfaces;
 
 namespace FoodManager.Application.Product.Commands.CreateProduct
@@ -9,21 +10,21 @@ namespace FoodManager.Application.Product.Commands.CreateProduct
         public CreateProductCommandValidator(IProductRepository repository)
         {
             RuleFor(p => p.Name)
-                .NotEmpty().WithMessage("Proszę wprowadzić nazwę produktu")
-                .MinimumLength(2).WithMessage("Nazwa produktu musi mieć co najmniej 2 znaki")
-                .MaximumLength(40).WithMessage("Nazwa produktu może mieć maksymalnie 40 znaków");
+                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .MinimumLength(2).WithMessage(Lang.MinLengthValidationMessage)
+                .MaximumLength(40).WithMessage(Lang.MaxLengthValidationMessage);
 
             RuleFor(p => p.Quantity)
-                .NotEmpty().WithMessage("Proszę podać ilość produktu")
-                .InclusiveBetween(1, 10000).WithMessage("Ilość produktu musi mieścić się w zakresie od 1 do 10000");
+                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .InclusiveBetween(1, 10000).WithMessage(Lang.RangeValidationMessage);
 
             RuleFor(p => p.Price)
-                .NotEmpty().WithMessage("Proszę podać cenę produktu")
-                .InclusiveBetween(0, 10000).WithMessage("Cena produktu musi mieścić się w zakresie od 0 do 10,000");
+                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .InclusiveBetween(0, 10000).WithMessage(Lang.RangeValidationMessage);
 
             RuleFor(p => p.ExpirationDate)
-                .NotEmpty().WithMessage("Proszę podać datę ważności")
-                .Must(DateTimeExtensions.IsTodayOrInTheFuture).WithMessage("Data ważności musi być dzisiejsza lub przyszła");
+                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .Must(DateTimeExtensions.IsTodayOrInTheFuture).WithMessage(Lang.ExpirationDateTodayOrFuture);
         }
     }
 }

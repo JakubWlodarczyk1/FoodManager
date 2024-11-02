@@ -1,7 +1,9 @@
-﻿@{
-    ViewData["Title"] = "Strona Główna";
+﻿@using FoodManager.Application.Resources.Localizations;
+
+@{
+    ViewData["Title"] = @Lang.HomePage;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Witaj</h1>
+    <h1 class="display-4">@Lang.Welcome</h1>
 </div>

@@ -1,3 +1,4 @@
+using System.Globalization;
 using FoodManager.Application.Extensions;
 using FoodManager.Infrastructure.Extensions;
 
@@ -22,6 +23,22 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.Use(async (context, next) =>
+{
+    if (context.Request.Cookies.TryGetValue("Language", out var cookie) && !string.IsNullOrEmpty(cookie))
+    {
+        Thread.CurrentThread.CurrentCulture = new CultureInfo(cookie);
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo(cookie);
+    }
+    else
+    {
+        Thread.CurrentThread.CurrentCulture = new CultureInfo("pl");
+        Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl");
+    }
+
+    await next.Invoke();
+});
 
 app.UseAuthorization();
 
