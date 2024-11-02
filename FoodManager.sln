@@ -5,11 +5,11 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodManager.MVC", "FoodManager.MVC\FoodManager.MVC.csproj", "{E270CDAF-04E2-489C-8C0B-09D50F3A87FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodManager.Domain", "FoodManager.Domain\FoodManager.Domain.csproj", "{ADE8ACCA-0C18-4ED8-B34F-D1877F945C50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodManager.Domain", "FoodManager.Domain\FoodManager.Domain.csproj", "{ADE8ACCA-0C18-4ED8-B34F-D1877F945C50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodManager.Application", "FoodManager.Application\FoodManager.Application.csproj", "{C4B94032-84A7-4D5D-82F7-1C0B61695073}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodManager.Application", "FoodManager.Application\FoodManager.Application.csproj", "{C4B94032-84A7-4D5D-82F7-1C0B61695073}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodManager.Infrastructure", "FoodManager.Infrastructure\FoodManager.Infrastructure.csproj", "{EABC4DB0-5150-4D17-BDEB-46CC33D7B6E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodManager.Infrastructure", "FoodManager.Infrastructure\FoodManager.Infrastructure.csproj", "{EABC4DB0-5150-4D17-BDEB-46CC33D7B6E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
