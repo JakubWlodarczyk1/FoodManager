@@ -234,4 +234,7 @@
   <data name="StepValidationMessage" xml:space="preserve">
     <value>Please enter a multiple of {0}.</value>
   </data>
+  <data name="ExpirationDateTodayOrFuture" xml:space="preserve">
+    <value>Expiration date must be today or in the future.</value>
+  </data>
 </root>

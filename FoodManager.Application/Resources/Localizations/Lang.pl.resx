@@ -234,4 +234,7 @@
   <data name="StepValidationMessage" xml:space="preserve">
     <value>Proszę wprowadzić wielokrotność {0}.</value>
   </data>
+  <data name="ExpirationDateTodayOrFuture" xml:space="preserve">
+    <value>Data ważności musi być dzisiejsza lub przyszła.</value>
+  </data>
 </root>

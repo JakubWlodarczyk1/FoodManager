@@ -214,7 +214,7 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Expiration date must be today or in the future..
         /// </summary>
         public static string ExpirationDateTodayOrFuture {
             get {
