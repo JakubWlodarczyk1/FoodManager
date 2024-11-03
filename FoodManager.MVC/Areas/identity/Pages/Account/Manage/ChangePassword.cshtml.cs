@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using FoodManager.Application.Resources.Localizations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -54,7 +55,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Required]
             [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
+            [Display(Name = "CurrentPassword", ResourceType = typeof(Lang))]
             public string OldPassword { get; set; }
 
             /// <summary>
@@ -62,9 +63,9 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessageResourceName = "PasswordErrorMessage", ErrorMessageResourceType = typeof(Lang), MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "NewPassword", ResourceType = typeof(Lang))]
             public string NewPassword { get; set; }
 
             /// <summary>
@@ -72,8 +73,8 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "ConfirmNewPassword", ResourceType = typeof(Lang))]
+            [Compare("NewPassword", ErrorMessageResourceName = "PasswordNotMatchError", ErrorMessageResourceType = typeof(Lang))]
             public string ConfirmPassword { get; set; }
         }
 

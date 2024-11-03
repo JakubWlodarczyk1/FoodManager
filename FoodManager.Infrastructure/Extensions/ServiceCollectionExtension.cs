@@ -1,4 +1,5 @@
-﻿using FoodManager.Domain.Interfaces;
+﻿using FoodManager.Application.Resources.Localizations;
+using FoodManager.Domain.Interfaces;
 using FoodManager.Infrastructure.Persistence;
 using FoodManager.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,7 @@ namespace FoodManager.Infrastructure.Extensions
                 {
                     options.Stores.MaxLengthForKeys = 450;
                 })
+                .AddErrorDescriber<LocalizedIdentityErrorDescriber>()
                 .AddEntityFrameworkStores<FoodManagerDbContext>();
 
             services.AddScoped<IProductRepository, ProductRepository>();

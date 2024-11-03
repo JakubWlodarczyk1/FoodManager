@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using FoodManager.Application.Resources.Localizations;
 
 namespace FoodManager.MVC.Areas.Identity.Pages.Account
 {
@@ -64,23 +65,25 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(Lang))]
+            [EmailAddress(ErrorMessageResourceName = "NotValidEmailMessage", ErrorMessageResourceType = typeof(Lang))]
+            [Display(Name = "Email", ResourceType = typeof(Lang))]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(Lang))]
             [DataType(DataType.Password)]
+            [Display(Name = "Password", ResourceType = typeof(Lang))]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Display(Name = "Remember me?")]
+            [Display(Name = "AskRememberMe", ResourceType = typeof(Lang))]
             public bool RememberMe { get; set; }
         }
 

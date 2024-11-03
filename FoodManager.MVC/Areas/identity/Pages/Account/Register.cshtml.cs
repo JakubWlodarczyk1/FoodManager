@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
+using FoodManager.Application.Resources.Localizations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -74,19 +75,19 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(Lang))]
+            [EmailAddress(ErrorMessageResourceName = "NotValidEmailMessage", ErrorMessageResourceType = typeof(Lang))]
+            [Display(Name = "Email", ResourceType = typeof(Lang))]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(Lang))]
+            [StringLength(100, ErrorMessageResourceName = "PasswordErrorMessage", ErrorMessageResourceType = typeof(Lang), MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Password", ResourceType = typeof(Lang))]
             public string Password { get; set; }
 
             /// <summary>
@@ -94,8 +95,8 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "ConfirmPassword", ResourceType = typeof(Lang))]
+            [Compare("Password", ErrorMessageResourceName = "PasswordNotMatchError", ErrorMessageResourceType = typeof(Lang))]
             public string ConfirmPassword { get; set; }
         }
 

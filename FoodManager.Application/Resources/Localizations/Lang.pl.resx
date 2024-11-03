@@ -132,6 +132,9 @@
   <data name="Add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
+  <data name="CurrencyISOCodes" xml:space="preserve">
+    <value>PLN</value>
+  </data>
   <data name="EditProduct" xml:space="preserve">
     <value>Edytuj produkt</value>
   </data>
@@ -156,14 +159,14 @@
   <data name="DeleteProductConfirmationMessage" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć produkt?</value>
   </data>
-  <data name="MillilitersShortcut" xml:space="preserve">
-    <value>ml</value>
+  <data name="PiecesShortcut" xml:space="preserve">
+    <value>szt.</value>
   </data>
   <data name="GramsShortcut" xml:space="preserve">
     <value>g</value>
   </data>
-  <data name="CurrencyISOCodes" xml:space="preserve">
-    <value>PLN</value>
+  <data name="MillilitersShortcut" xml:space="preserve">
+    <value>ml</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Opis</value>
@@ -182,9 +185,6 @@
   </data>
   <data name="ExpirationDate" xml:space="preserve">
     <value>Data ważności</value>
-  </data>
-  <data name="PiecesShortcut" xml:space="preserve">
-    <value>szt.</value>
   </data>
   <data name="RequiredValidationMessage" xml:space="preserve">
     <value>To pole jest wymagane.</value>
@@ -239,5 +239,179 @@
   </data>
   <data name="NoAccessMessage" xml:space="preserve">
     <value>Nie masz dostępu do tego zasobu</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Usuń konto</value>
+  </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Zarządzaj swoim kontem</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Zmiana hasła</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Aktualizuj hasło</value>
+  </data>
+  <data name="EnterOldPasswordMessage" xml:space="preserve">
+    <value>Proszę wprowadź swoje stare hasło.</value>
+  </data>
+  <data name="EnterNewPasswordMessage" xml:space="preserve">
+    <value>Proszę wprowadź swoje nowe hasło.</value>
+  </data>
+  <data name="ConfirmNewPasswordMessage" xml:space="preserve">
+    <value>Proszę potwierdź swoje nowe hasło.</value>
+  </data>
+  <data name="DeleteAccountWarning" xml:space="preserve">
+    <value>Usunięcie konta spowoduje trwałe usunięcie wszystkich danych i nie można tego cofnąć.</value>
+  </data>
+  <data name="EnterCurrentPasswordMessage" xml:space="preserve">
+    <value>Proszę wprowadź swoje aktualne hasło.</value>
+  </data>
+  <data name="ChooseUsernameMessage" xml:space="preserve">
+    <value>Proszę wybrać nazwę użytkownika.</value>
+  </data>
+  <data name="SetPassword" xml:space="preserve">
+    <value>Ustaw hasło</value>
+  </data>
+  <data name="SetYourPassword" xml:space="preserve">
+    <value>Ustaw swoje hasło</value>
+  </data>
+  <data name="MissingLocalAccountInstructions" xml:space="preserve">
+    <value>Nie masz lokalnego loginu/hasła dla tej strony. Dodaj konto lokalne, aby móc logować się bez użycia zewnętrznego loginu.</value>
+  </data>
+  <data name="AccessDenied" xml:space="preserve">
+    <value>Dostęp zabroniony</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Zaloguj się</value>
+  </data>
+  <data name="LocalAccountLoginPrompt" xml:space="preserve">
+    <value>Użyj konta lokalnego, aby się zalogować.</value>
+  </data>
+  <data name="EmailPlaceholderExample" xml:space="preserve">
+    <value>nazwa@przyklad.com</value>
+  </data>
+  <data name="AskRememberMe" xml:space="preserve">
+    <value>Zapamiętaj mnie?</value>
+  </data>
+  <data name="RegisterNewUser" xml:space="preserve">
+    <value>Zarejestruj się jako nowy użytkownik</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Wyloguj się</value>
+  </data>
+  <data name="ClickHereToLogout" xml:space="preserve">
+    <value>Kliknij tutaj, aby się wylogować</value>
+  </data>
+  <data name="SuccessfullLogout" xml:space="preserve">
+    <value>Pomyślnie wylogowano z aplikacji.</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Utwórz nowe konto.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Potwierdź hasło</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Obecne hasło</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nowe hasło</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Potwierdź nowe hasło</value>
+  </data>
+  <data name="PasswordErrorMessage" xml:space="preserve">
+    <value>{0} musi mieć co najmniej {2} i maksymalnie {1} znaków.</value>
+  </data>
+  <data name="PasswordNotMatchError" xml:space="preserve">
+    <value>Nowe hasne i jego potwierdzenie nie są zgodne.</value>
+  </data>
+  <data name="RequiredFieldMessage" xml:space="preserve">
+    <value>Pole {0} jest wymagane.</value>
+  </data>
+  <data name="NotValidEmailMessage" xml:space="preserve">
+    <value>Pole {0} nie jest poprawnym adresem e-mail.</value>
+  </data>
+  <data name="ConcurrencyFailure" xml:space="preserve">
+    <value>Wystąpił błąd współbieżności, obiekt został zmodyfikowany.</value>
+  </data>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>Adres e-mail '{0}' jest już zajęty.</value>
+  </data>
+  <data name="DuplicateRoleName" xml:space="preserve">
+    <value> Nazwa roli '{0}' jest już zajęta.</value>
+  </data>
+  <data name="DuplicateUserName" xml:space="preserve">
+    <value>Nazwa użytkownika '{0}' jest już zajęta.</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Adres e-mail '{0}' jest nieprawidłowy.</value>
+  </data>
+  <data name="InvalidRoleName" xml:space="preserve">
+    <value>Nazwa roli '{0}' jest nieprawidłowa.</value>
+  </data>
+  <data name="LoginAlreadyAssociated" xml:space="preserve">
+    <value>Użytkownik z tym loginem już istnieje.</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Nieprawidłowe hasło.</value>
+  </data>
+  <data name="PasswordRequiresDigit" xml:space="preserve">
+    <value>Hasła muszą zawierać co najmniej jedną cyfrę ('0'-'9').</value>
+  </data>
+  <data name="PasswordRequiresLower" xml:space="preserve">
+    <value>Hasła muszą zawierać co najmniej jedną małą literę ('a'-'z').</value>
+  </data>
+  <data name="PasswordRequiresNonAlphanumeric" xml:space="preserve">
+    <value>Hasła muszą zawierać co najmniej jeden znak niealfanumeryczny.</value>
+  </data>
+  <data name="PasswordRequiresUniqueChars" xml:space="preserve">
+    <value>Hasła muszą zawierać co najmniej {0} różnych znaków.</value>
+  </data>
+  <data name="PasswordRequiresUpper" xml:space="preserve">
+    <value>Hasła muszą zawierać co najmniej jedną wielką literę ('A'-'Z').</value>
+  </data>
+  <data name="PasswordTooShort" xml:space="preserve">
+    <value>Hasła muszą mieć co najmniej {0} znaków.</value>
+  </data>
+  <data name="UserAlreadyHasPassword" xml:space="preserve">
+    <value>Użytkownik ma już ustawione hasło.</value>
+  </data>
+  <data name="UserAlreadyInRole" xml:space="preserve">
+    <value>Użytkownik jest już przypisany do roli '{0}'.</value>
+  </data>
+  <data name="UserNotInRole" xml:space="preserve">
+    <value>Użytkownik nie jest przypisany do roli '{0}'.</value>
+  </data>
+  <data name="UserLockoutNotEnabled" xml:space="preserve">
+    <value>Blokowanie nie jest włączone dla tego użytkownika.</value>
+  </data>
+  <data name="DefaultIdentityError" xml:space="preserve">
+    <value>Wystąpił nieznany błąd.</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Nieprawidłowy token.</value>
+  </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Nazwa użytkownika '{0}' jest nieprawidłowa, może zawierać tylko litery lub cyfry.</value>
+  </data>
+  <data name="RecoveryCodeRedemptionFailed" xml:space="preserve">
+    <value>Wykorzystanie kodu odzyskiwania nie powiodło się.</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
   </data>
 </root>

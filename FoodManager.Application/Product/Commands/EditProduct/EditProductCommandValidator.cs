@@ -10,20 +10,20 @@ namespace FoodManager.Application.Product.Commands.EditProduct
         public EditProductCommandValidator(IProductRepository repository)
         {
             RuleFor(p => p.Name)
-                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .NotEmpty().WithMessage(string.Format(Lang.RequiredFieldMessage, Lang.Name))
                 .MinimumLength(2).WithMessage(Lang.MinLengthValidationMessage)
                 .MaximumLength(40).WithMessage(Lang.MaxLengthValidationMessage);
 
             RuleFor(p => p.Quantity)
-                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .NotEmpty().WithMessage(string.Format(Lang.RequiredFieldMessage, Lang.Quantity))
                 .InclusiveBetween(1, 10000).WithMessage(Lang.RangeValidationMessage);
 
             RuleFor(p => p.Price)
-                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .NotEmpty().WithMessage(string.Format(Lang.RequiredFieldMessage, Lang.Price))
                 .InclusiveBetween(0, 10000).WithMessage(Lang.RangeValidationMessage);
 
             RuleFor(p => p.ExpirationDate)
-                .NotEmpty().WithMessage(Lang.RequiredValidationMessage)
+                .NotEmpty().WithMessage(string.Format(Lang.RequiredFieldMessage, Lang.ExpirationDate))
                 .Must(DateTimeExtensions.IsTodayOrInTheFuture).WithMessage(Lang.ExpirationDateTodayOrFuture);
         }
     }

@@ -1,7 +1,8 @@
 ﻿@page
+@using FoodManager.Application.Resources.Localizations
 @model PersonalDataModel
 @{
-    ViewData["Title"] = "Personal Data";
+    ViewData["Title"] = @Lang.DeleteAccount;
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
@@ -10,10 +11,10 @@
 <div class="row">
     <div class="col-md-6">
         <p>
-            <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
+            <strong>@Lang.DeleteAccountWarning</strong>
         </p>
         <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">@Lang.Delete</a>
         </p>
     </div>
 </div>

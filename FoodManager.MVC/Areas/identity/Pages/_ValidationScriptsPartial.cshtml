@@ -1,2 +1,10 @@
-﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+﻿@{
+    var cultureCode = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+}
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@if (cultureCode != "en")
+{
+    <script src="~/lib/jquery-validation/localization/messages-@(cultureCode).js"></script>
+}
