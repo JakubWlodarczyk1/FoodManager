@@ -6,7 +6,7 @@ namespace FoodManager.Domain.Interfaces
     {
         Task Create(Product product);
         Task Update(Product product);
-        Task Delete(int id);
+        Task Delete(Product product);
         Task<Product?> GetById(int id);
         Task<IEnumerable<Product>> GetAll();
     }

@@ -237,4 +237,7 @@
   <data name="ExpirationDateTodayOrFuture" xml:space="preserve">
     <value>Data ważności musi być dzisiejsza lub przyszła.</value>
   </data>
+  <data name="NoAccessMessage" xml:space="preserve">
+    <value>Nie masz dostępu do tego zasobu</value>
+  </data>
 </root>

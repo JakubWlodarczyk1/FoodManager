@@ -295,6 +295,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have no access to this resource.
+        /// </summary>
+        public static string NoAccessMessage {
+            get {
+                return ResourceManager.GetString("NoAccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid number..
         /// </summary>
         public static string NumberValidationMessage {

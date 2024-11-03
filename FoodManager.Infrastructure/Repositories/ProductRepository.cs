@@ -19,12 +19,8 @@ namespace FoodManager.Infrastructure.Repositories
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(Product product)
         {
-            var product = await dbContext.Products.FindAsync(id);
-            if (product == null)
-                return;
-
             dbContext.Products.Remove(product);
             await dbContext.SaveChangesAsync();
         }

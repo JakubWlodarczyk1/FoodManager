@@ -28,5 +28,7 @@ namespace FoodManager.Application.Product
 
         [Display(Name = "ExpirationDate", ResourceType = typeof(Lang))]
         public DateTime ExpirationDate { get; set; }
+
+        public bool IsEditable { get; set; }
     }
 }

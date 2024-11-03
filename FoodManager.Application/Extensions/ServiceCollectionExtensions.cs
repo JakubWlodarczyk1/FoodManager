@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using FoodManager.Application.ApplicationUser;
@@ -12,6 +13,13 @@ namespace FoodManager.Application.Extensions
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IUserContext, UserContext>();
+            services.AddScoped(provider => new MapperConfiguration(cfg =>
+            {
+                var scope = provider.CreateScope();
+                var userContext = scope.ServiceProvider.GetRequiredService<IUserContext>();
+                cfg.AddProfile(new ProductMappingProfile(userContext));
+            }).CreateMapper()
+            );
 
             services.AddMediatR(cfg => 
                 cfg.RegisterServicesFromAssemblyContaining(typeof(CreateProductCommand)));

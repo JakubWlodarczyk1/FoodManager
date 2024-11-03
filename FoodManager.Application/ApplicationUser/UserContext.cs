@@ -18,6 +18,11 @@ namespace FoodManager.Application.ApplicationUser
                 throw new InvalidOperationException("Context user is not present");
             }
 
+            if (user.Identity is not { IsAuthenticated: true })
+            {
+                throw new InvalidOperationException("User is not authenticated");
+            }
+
             var id = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var email = user.FindFirst(c => c.Type == ClaimTypes.Email)!.Value;
 

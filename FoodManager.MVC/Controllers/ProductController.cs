@@ -11,20 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace FoodManager.MVC.Controllers
 {
     [Authorize]
-    public class ProductController : Controller
+    public class ProductController(IMediator mediator, IMapper mapper) : Controller
     {
-        private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
-
-        public ProductController(IMediator mediator, IMapper mapper)
-        {
-            _mediator = mediator;
-            _mapper = mapper;
-        }
-
         public async Task<IActionResult> Index()
         {
-            var products = await _mediator.Send(new GetAllProductsQuery());
+            var products = await mediator.Send(new GetAllProductsQuery());
             return View(products);
         }
 
@@ -42,15 +33,21 @@ namespace FoodManager.MVC.Controllers
                 return View(command);
             }
 
-            await _mediator.Send(command);
+            await mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
 
         [Route("Product/{id:int}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
-            var FoodDto = await _mediator.Send(new GetProductByIdQuery(id));
-            var model = _mapper.Map<EditProductCommand>(FoodDto);
+            var productDto = await mediator.Send(new GetProductByIdQuery(id));
+
+            if (!productDto.IsEditable)
+            {
+                return RedirectToAction("NoAccess", "Home");
+            }
+
+            var model = mapper.Map<EditProductCommand>(productDto);
 
             return View(model);
         }
@@ -65,13 +62,13 @@ namespace FoodManager.MVC.Controllers
                 return View(command);
             }
 
-            await _mediator.Send(command);
+            await mediator.Send(command);
             return RedirectToAction(nameof(Index));
         } 
         
         public async Task<IActionResult> Delete(int id)
         {
-            await _mediator.Send(new DeleteProductCommand(id));
+            await mediator.Send(new DeleteProductCommand(id));
             return RedirectToAction(nameof(Index));
         }
     }
