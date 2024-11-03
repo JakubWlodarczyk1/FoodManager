@@ -1,4 +1,5 @@
 ﻿using FoodManager.Domain.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace FoodManager.Domain.Entities
 {
@@ -13,5 +14,8 @@ namespace FoodManager.Domain.Entities
         public decimal Price { get; set; }
         public DateTime ExpirationDate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        public required string CreatedById { get; set; }
+        public required IdentityUser CreatedBy { get; set; }
     }
 }

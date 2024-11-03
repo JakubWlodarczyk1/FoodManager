@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using FoodManager.Application.Product;
 using FoodManager.Application.Product.Commands.CreateProduct;
 using FoodManager.Application.Product.Commands.DeleteProduct;
 using FoodManager.Application.Product.Commands.EditProduct;
 using FoodManager.Application.Product.Queries.GetAllProducts;
 using FoodManager.Application.Product.Queries.GetProductById;
-using FoodManager.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FoodManager.MVC.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IMediator _mediator;
