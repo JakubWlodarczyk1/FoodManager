@@ -9,5 +9,6 @@ namespace FoodManager.Domain.Interfaces
         Task Delete(Product product);
         Task<Product?> GetById(int id);
         Task<IEnumerable<Product>> GetAll();
+        Task<IEnumerable<Product>> GetUserProducts(string userId);
     }
 }

@@ -34,5 +34,10 @@ namespace FoodManager.Infrastructure.Repositories
         {
             return await dbContext.Products.ToListAsync();
         }
+
+        public async Task<IEnumerable<Product>> GetUserProducts(string userId)
+        {
+            return await dbContext.Products.Where(p => p.CreatedById == userId).ToListAsync();
+        }
     }
 }
