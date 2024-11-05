@@ -414,4 +414,13 @@
   <data name="Username" xml:space="preserve">
     <value>Nazwa użytkownika</value>
   </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Nieudana próba logowania.</value>
+  </data>
+  <data name="UserLoggedIn" xml:space="preserve">
+    <value>Użytkownik zalogowany.</value>
+  </data>
+  <data name="UserAccountLockedOut" xml:space="preserve">
+    <value>Konto użytkownika zablokowane.</value>
+  </data>
 </root>

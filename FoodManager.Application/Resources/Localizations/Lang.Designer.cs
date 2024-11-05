@@ -448,6 +448,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid login attempt..
+        /// </summary>
+        public static string InvalidLoginAttempt {
+            get {
+                return ResourceManager.GetString("InvalidLoginAttempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Role name &apos;{0}&apos; is invalid..
         /// </summary>
         public static string InvalidRoleName {
@@ -898,6 +907,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User account locked out..
+        /// </summary>
+        public static string UserAccountLockedOut {
+            get {
+                return ResourceManager.GetString("UserAccountLockedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User already has a password set..
         /// </summary>
         public static string UserAlreadyHasPassword {
@@ -907,7 +925,7 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  User already in role &apos;{0}&apos;..
+        ///   Looks up a localized string similar to User already in role &apos;{0}&apos;..
         /// </summary>
         public static string UserAlreadyInRole {
             get {
@@ -921,6 +939,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string UserLockoutNotEnabled {
             get {
                 return ResourceManager.GetString("UserLockoutNotEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User logged in..
+        /// </summary>
+        public static string UserLoggedIn {
+            get {
+                return ResourceManager.GetString("UserLoggedIn", resourceCulture);
             }
         }
         

@@ -391,7 +391,7 @@
     <value>User already has a password set.</value>
   </data>
   <data name="UserAlreadyInRole" xml:space="preserve">
-    <value> User already in role '{0}'.</value>
+    <value>User already in role '{0}'.</value>
   </data>
   <data name="UserNotInRole" xml:space="preserve">
     <value>User is not in role '{0}'.</value>
@@ -413,5 +413,14 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Invalid login attempt.</value>
+  </data>
+  <data name="UserLoggedIn" xml:space="preserve">
+    <value>User logged in.</value>
+  </data>
+  <data name="UserAccountLockedOut" xml:space="preserve">
+    <value>User account locked out.</value>
   </data>
 </root>
