@@ -423,4 +423,25 @@
   <data name="UserAccountLockedOut" xml:space="preserve">
     <value>Konto użytkownika zablokowane.</value>
   </data>
+  <data name="Fruits" xml:space="preserve">
+    <value>owoce</value>
+  </data>
+  <data name="Vegetables" xml:space="preserve">
+    <value>warzywa</value>
+  </data>
+  <data name="Dairy" xml:space="preserve">
+    <value>nabiał</value>
+  </data>
+  <data name="Meat" xml:space="preserve">
+    <value>mięso</value>
+  </data>
+  <data name="Snacks" xml:space="preserve">
+    <value>przekąski</value>
+  </data>
+  <data name="Protein" xml:space="preserve">
+    <value>proteinowe</value>
+  </data>
+  <data name="Oils" xml:space="preserve">
+    <value>oleje</value>
+  </data>
 </root>

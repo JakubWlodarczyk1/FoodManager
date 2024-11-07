@@ -423,4 +423,25 @@
   <data name="UserAccountLockedOut" xml:space="preserve">
     <value>User account locked out.</value>
   </data>
+  <data name="Fruits" xml:space="preserve">
+    <value>fruits</value>
+  </data>
+  <data name="Vegetables" xml:space="preserve">
+    <value>vegetables</value>
+  </data>
+  <data name="Dairy" xml:space="preserve">
+    <value>dairy</value>
+  </data>
+  <data name="Meat" xml:space="preserve">
+    <value>meat</value>
+  </data>
+  <data name="Snacks" xml:space="preserve">
+    <value>snacks</value>
+  </data>
+  <data name="Protein" xml:space="preserve">
+    <value>protein</value>
+  </data>
+  <data name="Oils" xml:space="preserve">
+    <value>oils</value>
+  </data>
 </root>

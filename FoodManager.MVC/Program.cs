@@ -1,6 +1,7 @@
 using System.Globalization;
 using FoodManager.Application.Extensions;
 using FoodManager.Infrastructure.Extensions;
+using FoodManager.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,11 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<CategorySeeder>();
+
+await seeder.Seed();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

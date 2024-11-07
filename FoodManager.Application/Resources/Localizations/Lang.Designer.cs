@@ -214,6 +214,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dairy.
+        /// </summary>
+        public static string Dairy {
+            get {
+                return ResourceManager.GetString("Dairy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid date (ISO)..
         /// </summary>
         public static string DateISOValidationMessage {
@@ -421,6 +430,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fruits.
+        /// </summary>
+        public static string Fruits {
+            get {
+                return ResourceManager.GetString("Fruits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to g.
         /// </summary>
         public static string GramsShortcut {
@@ -547,6 +565,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to meat.
+        /// </summary>
+        public static string Meat {
+            get {
+                return ResourceManager.GetString("Meat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ml.
         /// </summary>
         public static string MillilitersShortcut {
@@ -624,6 +651,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string NumberValidationMessage {
             get {
                 return ResourceManager.GetString("NumberValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to oils.
+        /// </summary>
+        public static string Oils {
+            get {
+                return ResourceManager.GetString("Oils", resourceCulture);
             }
         }
         
@@ -754,6 +790,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to protein.
+        /// </summary>
+        public static string Protein {
+            get {
+                return ResourceManager.GetString("Protein", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Quantity.
         /// </summary>
         public static string Quantity {
@@ -862,6 +907,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to snacks.
+        /// </summary>
+        public static string Snacks {
+            get {
+                return ResourceManager.GetString("Snacks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a multiple of {0}..
         /// </summary>
         public static string StepValidationMessage {
@@ -966,6 +1020,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string UserNotInRole {
             get {
                 return ResourceManager.GetString("UserNotInRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vegetables.
+        /// </summary>
+        public static string Vegetables {
+            get {
+                return ResourceManager.GetString("Vegetables", resourceCulture);
             }
         }
         
