@@ -7,6 +7,7 @@ namespace FoodManager.Infrastructure.Persistence
     public class FoodManagerDbContext(DbContextOptions<FoodManagerDbContext> options) : IdentityDbContext(options)
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -15,6 +16,16 @@ namespace FoodManager.Infrastructure.Persistence
             modelBuilder.Entity<Product>()
                 .Property(p => p.Unit)
                 .HasConversion<string>();
+
+            modelBuilder.Entity<Category>()
+                .Property(c => c.Type)
+                .HasConversion<string>();
+
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.Category)
+                .WithMany()
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

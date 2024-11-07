@@ -24,6 +24,7 @@ namespace FoodManager.Infrastructure.Extensions
                 .AddEntityFrameworkStores<FoodManagerDbContext>();
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
     }
 }
