@@ -1,4 +1,5 @@
-﻿@using FoodManager.Application.Resources.Localizations
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery AntiForgery
+@using FoodManager.Application.Resources.Localizations
 @{
     var action = ViewContext.RouteData.Values["Action"]?.ToString();
     var controller = ViewContext.RouteData.Values["Controller"]?.ToString();
@@ -9,6 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="@AntiForgery.GetAndStoreTokens(ViewContext.HttpContext).RequestToken" />
     <title>@ViewData["Title"] - FoodManager</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -48,8 +50,8 @@
                                 }
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-lang="pl">Polski</a></li>
-                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ChangeLanguage" asp-route-lang="en">English</a></li>
+                                <li><a class="dropdown-item" asp-controller="Localization" asp-action="ChangeLanguage" asp-route-lang="pl">Polski</a></li>
+                                <li><a class="dropdown-item" asp-controller="Localization" asp-action="ChangeLanguage" asp-route-lang="en">English</a></li>
                             </ul>
                         </li>
                     </ul>

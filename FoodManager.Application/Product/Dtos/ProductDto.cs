@@ -2,20 +2,24 @@
 using FoodManager.Application.Resources.Localizations;
 using FoodManager.Domain.Enums;
 
-namespace FoodManager.Application.Product
+namespace FoodManager.Application.Product.Dtos
 {
     public class ProductDto
     {
         public int Id { get; set; }
 
         [Display(Name = "Name", ResourceType = typeof(Lang))]
-        public required string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         [Display(Name = "Description", ResourceType = typeof(Lang))]
         public string? Description { get; set; }
 
+        public int? CategoryId { get; set; }
+
         [Display(Name = "Category", ResourceType = typeof(Lang))]
-        public string? Category { get; set; }
+        public string? CategoryName { get; set; }
+
+        public string? CategoryTranslationKey { get; set; }
 
         [Display(Name = "Quantity", ResourceType = typeof(Lang))]
         public int Quantity { get; set; }

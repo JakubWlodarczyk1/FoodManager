@@ -6,6 +6,9 @@ namespace FoodManager.Application.Product.Commands.CreateProduct
 {
     public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateProductCommandValidator"/> class and sets up validation rules.
+        /// </summary>
         public CreateProductCommandValidator()
         {
             RuleFor(p => p.Name)

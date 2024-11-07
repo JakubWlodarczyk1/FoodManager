@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using FoodManager.Application.Resources.Localizations;
+using Microsoft.AspNetCore.Identity;
 
-namespace FoodManager.Application.Resources.Localizations
+namespace FoodManager.Infrastructure.Localization
 {
+    /// <summary>
+    /// Provides localized error messages for ASP.NET Identity operations.
+    /// </summary>
     public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
     {
         public override IdentityError DuplicateEmail(string email)

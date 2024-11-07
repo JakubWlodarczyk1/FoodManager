@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FoodManager.Application.Product.Dtos;
+using MediatR;
 
 namespace FoodManager.Application.Product.Commands.CreateProduct
 {

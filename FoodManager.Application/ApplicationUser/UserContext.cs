@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace FoodManager.Application.ApplicationUser
 {
-    public interface IUserContext
-    {
-        CurrentUser GetCurrentUser();
-    }
-
     public class UserContext(IHttpContextAccessor httpContextAccessor) : IUserContext
     {
+        /// <summary>
+        /// Retrieves basic information (userId and email) about the currently authenticated user.
+        /// </summary>
         public CurrentUser GetCurrentUser()
         {
             var user = httpContextAccessor?.HttpContext?.User;

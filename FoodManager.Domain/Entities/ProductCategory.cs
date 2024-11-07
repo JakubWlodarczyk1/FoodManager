@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace FoodManager.Domain.Entities
 {
-    public class Category
+    public class ProductCategory
     {
         public int Id { get; set; }
 
@@ -14,11 +14,9 @@ namespace FoodManager.Domain.Entities
             set => _name = value.ToLowerInvariant();
         }
 
-        public CategoryType Type { get; set; }
+        public CategoryType Type { get; set; } = CategoryType.Custom;
         public string? TranslationKey { get; set; }
         public string? CreatedById { get; set; }
         public IdentityUser? CreatedBy { get; set; }
-
-        public void EncodeName() => Name = Name.ToLower();
     }
 }

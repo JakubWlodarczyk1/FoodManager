@@ -1,13 +1,15 @@
 ﻿using FluentValidation;
 using FoodManager.Application.Extensions;
 using FoodManager.Application.Resources.Localizations;
-using FoodManager.Domain.Interfaces;
 
 namespace FoodManager.Application.Product.Commands.EditProduct
 {
     public class EditProductCommandValidator : AbstractValidator<EditProductCommand>
     {
-        public EditProductCommandValidator(IProductRepository repository)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditProductCommandValidator"/> class and sets up validation rules.
+        /// </summary>
+        public EditProductCommandValidator()
         {
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage(string.Format(Lang.RequiredFieldMessage, Lang.Name))

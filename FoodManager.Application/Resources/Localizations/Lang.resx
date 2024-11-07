@@ -444,4 +444,31 @@
   <data name="Oils" xml:space="preserve">
     <value>oils</value>
   </data>
+  <data name="ChooseOption" xml:space="preserve">
+    <value>Choose the option</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Add new</value>
+  </data>
+  <data name="Uncategorized" xml:space="preserve">
+    <value>Uncategorized</value>
+  </data>
+  <data name="ResetCategory" xml:space="preserve">
+    <value>Reset category</value>
+  </data>
+  <data name="ChooseCategory" xml:space="preserve">
+    <value>Choose category</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="AddNewCategory" xml:space="preserve">
+    <value>Add new category</value>
+  </data>
+  <data name="CategoryAlreadyExistsMessage" xml:space="preserve">
+    <value>A category with the name '{0}' already exists.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

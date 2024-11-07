@@ -13,7 +13,7 @@ builder.Services.AddApplication();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<CategorySeeder>();
+var seeder = scope.ServiceProvider.GetRequiredService<ProductCategorySeeder>();
 
 await seeder.Seed();
 

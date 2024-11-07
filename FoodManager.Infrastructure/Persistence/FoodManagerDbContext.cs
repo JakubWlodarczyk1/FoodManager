@@ -7,7 +7,7 @@ namespace FoodManager.Infrastructure.Persistence
     public class FoodManagerDbContext(DbContextOptions<FoodManagerDbContext> options) : IdentityDbContext(options)
     {
         public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace FoodManager.Infrastructure.Persistence
                 .Property(p => p.Unit)
                 .HasConversion<string>();
 
-            modelBuilder.Entity<Category>()
+            modelBuilder.Entity<ProductCategory>()
                 .Property(c => c.Type)
                 .HasConversion<string>();
 

@@ -1,6 +1,7 @@
 ﻿@using FoodManager.Application.Extensions
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using FoodManager.Application.Product.Commands.CreateProduct
+@using FoodManager.Application.ProductCategory.Commands.CreateProductCategory
 @using FoodManager.Application.Resources.Localizations;
 
 @model CreateProductCommand
@@ -27,8 +28,23 @@
             </div>
 
             <div class="form-group mb-3">
-                <label class="control-label" asp-for="Category">@Html.DisplayNameFor(model => model.Category)</label>
-                <input class="form-control" type="text" asp-for="Category" />
+                <label class="control-label">@Html.DisplayNameFor(model => model.CategoryName)</label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary d-flex justify-content-between align-items-center w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="text-start" id="dropdownMenuButtonText">@Lang.ChooseCategory</span>
+                        <span class="ms-auto dropdown-toggle"></span>
+                    </button>
+                    <div class="dropdown-menu p-2 w-100" aria-labelledby="dropdownMenuButton">
+                        <input type="text" class="form-control mb-2" placeholder="@Lang.Search..." id="dropdownSearch">
+                        <ul class="list-unstyled mb-0" id="dropdownOptions">
+                        </ul>
+                        <li><hr class="dropdown-divider-bg"></li>
+                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createProductCategoryModal">@Lang.AddNew +</a>
+                        <a class="dropdown-item" data-value="null" id="resetCategory">@Lang.ResetCategory</a>
+                    </div>
+                </div>
+                <input type="hidden" asp-for="CategoryId" id="selectedCategory">
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
 
             <div class="form-group mb-3">
@@ -56,7 +72,7 @@
                 <input class="form-control" type="date" asp-for="ExpirationDate" />
                 <span asp-validation-for="ExpirationDate" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group mb-3">
                 <input type="submit" value="@Lang.Add" class="btn btn-primary" />
             </div>
@@ -64,8 +80,9 @@
     </div>
 </div>
 
+<partial name="PartialViews/_CreateProductCategory" model="new CreateProductCategoryCommand()" />
+
 @section Scripts {
-    @{
-       await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); };
+    <script src="~/js/Product/Create.js"></script>
 }

@@ -88,6 +88,24 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add new.
+        /// </summary>
+        public static string AddNew {
+            get {
+                return ResourceManager.GetString("AddNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add new category.
+        /// </summary>
+        public static string AddNewCategory {
+            get {
+                return ResourceManager.GetString("AddNewCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add product.
         /// </summary>
         public static string AddProduct {
@@ -124,11 +142,38 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A category with the name &apos;{0}&apos; already exists..
+        /// </summary>
+        public static string CategoryAlreadyExistsMessage {
+            get {
+                return ResourceManager.GetString("CategoryAlreadyExistsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change password.
         /// </summary>
         public static string ChangePassword {
             get {
                 return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose category.
+        /// </summary>
+        public static string ChooseCategory {
+            get {
+                return ResourceManager.GetString("ChooseCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the option.
+        /// </summary>
+        public static string ChooseOption {
+            get {
+                return ResourceManager.GetString("ChooseOption", resourceCulture);
             }
         }
         
@@ -147,6 +192,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string ClickHereToLogout {
             get {
                 return ResourceManager.GetString("ClickHereToLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         
@@ -880,11 +934,29 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset category.
+        /// </summary>
+        public static string ResetCategory {
+            get {
+                return ResourceManager.GetString("ResetCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         
@@ -930,6 +1002,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string SuccessfullLogout {
             get {
                 return ResourceManager.GetString("SuccessfullLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncategorized.
+        /// </summary>
+        public static string Uncategorized {
+            get {
+                return ResourceManager.GetString("Uncategorized", resourceCulture);
             }
         }
         
