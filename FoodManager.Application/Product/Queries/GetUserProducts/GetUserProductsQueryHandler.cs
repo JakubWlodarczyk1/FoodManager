@@ -17,7 +17,7 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
         public async Task<IEnumerable<ProductDto>> Handle(GetUserProductsQuery request, CancellationToken cancellationToken)
         {
             var user = userContext.GetCurrentUser();
-            var products = await productRepository.GetUserProducts(user.Id);
+            var products = await productRepository.GetUserMatchingProducts(user.Id, request.SearchPhrase);
 
             var dtos = mapper.Map<IEnumerable<ProductDto>>(products);
 

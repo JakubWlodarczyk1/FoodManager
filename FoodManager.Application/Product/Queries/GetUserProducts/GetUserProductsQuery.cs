@@ -5,5 +5,6 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
 {
     public class GetUserProductsQuery : IRequest<IEnumerable<ProductDto>>
     {
+        public string? SearchPhrase { get; set; }
     }
 }

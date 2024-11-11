@@ -16,7 +16,7 @@ namespace FoodManager.MVC.Controllers
         /// <summary>
         /// Displays a list of products associated with the current user.
         /// </summary>
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] GetUserProductsQuery query)
         {
             var products = await mediator.Send(new GetUserProductsQuery());
             return View(products);

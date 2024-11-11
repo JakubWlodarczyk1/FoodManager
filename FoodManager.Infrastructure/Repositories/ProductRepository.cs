@@ -65,5 +65,25 @@ namespace FoodManager.Infrastructure.Repositories
         {
             return await dbContext.Products.Where(p => p.CreatedById == userId).Include(p => p.Category).ToListAsync();
         }
+
+        public async Task<IEnumerable<Product>> GetUserMatchingProducts(string userId, string? searchPhrase)
+        {
+            var searchPhraseLower = searchPhrase?.ToLower();
+
+            return await dbContext.Products
+                .Where(p =>
+                    p.CreatedById == userId &&
+                    (
+                        searchPhraseLower == null ||
+                        (
+                            p.Name.ToLower().Contains(searchPhraseLower) ||
+                            (p.Description != null && p.Description.ToLower().Contains(searchPhraseLower))
+                        )
+                    )
+                )
+                .Include(p => p.Category)
+                .ToListAsync();
+
+        }
     }
 }
