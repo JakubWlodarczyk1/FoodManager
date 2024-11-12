@@ -718,6 +718,24 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Page number must be greater than or equal to 1..
+        /// </summary>
+        public static string PageNumberGreaterThanOrEqual {
+            get {
+                return ResourceManager.GetString("PageNumberGreaterThanOrEqual", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page size is invalid. Allowed values are {0}..
+        /// </summary>
+        public static string PageSizeInvalid {
+            get {
+                return ResourceManager.GetString("PageSizeInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -952,7 +970,7 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {
             get {

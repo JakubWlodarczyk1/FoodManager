@@ -471,4 +471,10 @@
   <data name="Search" xml:space="preserve">
     <value>Szukaj</value>
   </data>
+  <data name="PageNumberGreaterThanOrEqual" xml:space="preserve">
+    <value>Numer strony musi być większy lub równy 1.</value>
+  </data>
+  <data name="PageSizeInvalid" xml:space="preserve">
+    <value>Rozmiar strony jest nieprawidłowy. Dozwolone wartości to {0}.</value>
+  </data>
 </root>
