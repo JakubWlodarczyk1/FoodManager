@@ -73,7 +73,12 @@ namespace FoodManager.Infrastructure.Localization
             return false;
         }
 
-        public static string? GetLocalizedString(string key)
+        /// <summary>
+        /// Retrieves the translated value for a given key from resource files.
+        /// </summary>
+        /// <param name="key">The resource key for the translation.</param>
+        /// <returns>The translated string, or null if the key is null or empty.</returns>
+        public static string? GetTranslatedValue(string? key)
         {
             return string.IsNullOrEmpty(key) ? null : Lang.ResourceManager.GetString(key);
         }

@@ -57,20 +57,18 @@ namespace FoodManager.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Retrieves products created by the specified user.
+        /// Retrieves products created by the specified user, filtered by an optional search phrase, with pagination support.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        /// <returns>A collection of <see cref="Product"/> created by the user.</returns>
-        public async Task<IEnumerable<Product>> GetUserProducts(string userId)
-        {
-            return await dbContext.Products.Where(p => p.CreatedById == userId).Include(p => p.Category).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Product>> GetUserMatchingProducts(string userId, string? searchPhrase)
+        /// <param name="searchPhrase">The optional search phrase to filter products by name or description.</param>
+        /// <param name="pageNumber">The page number for pagination.</param>
+        /// <param name="pageSize">The number of items per page.</param>
+        /// <returns>A tuple containing a collection of <see cref="Product"/> that match the search criteria and the total count of matching products.</returns>
+        public async Task<(IEnumerable<Product>, int)> GetUserProductsMatchingSearch(string userId, string? searchPhrase, int pageNumber, int pageSize)
         {
             var searchPhraseLower = searchPhrase?.ToLower();
 
-            return await dbContext.Products
+            var baseQuery = dbContext.Products
                 .Where(p =>
                     p.CreatedById == userId &&
                     (
@@ -80,10 +78,17 @@ namespace FoodManager.Infrastructure.Repositories
                             (p.Description != null && p.Description.ToLower().Contains(searchPhraseLower))
                         )
                     )
-                )
+                );
+
+            var totalCount = await baseQuery.CountAsync();
+
+            var products = await baseQuery
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
                 .Include(p => p.Category)
                 .ToListAsync();
 
+            return (products, totalCount);
         }
     }
 }
