@@ -477,4 +477,13 @@
   <data name="PageSizeInvalid" xml:space="preserve">
     <value>Rozmiar strony jest nieprawidłowy. Dozwolone wartości to {0}.</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Następny</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Poprzedni</value>
+  </data>
+  <data name="ShowingProducts" xml:space="preserve">
+    <value>Wyświetlanie produktów {0}-{1} z {2}</value>
+  </data>
 </root>

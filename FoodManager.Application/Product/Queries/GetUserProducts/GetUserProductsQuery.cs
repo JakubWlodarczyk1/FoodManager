@@ -7,7 +7,7 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
     public class GetUserProductsQuery : IRequest<PagedResult<ProductDto>>
     {
         public string? SearchPhrase { get; set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
+        public int PageNumber { get; set; } = PaginationDefaults.DefaultPageNumber;
+        public int PageSize { get; set; } = PaginationDefaults.DefaultPageSize;
     }
 }

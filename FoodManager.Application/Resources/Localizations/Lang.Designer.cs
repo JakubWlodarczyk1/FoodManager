@@ -682,6 +682,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have no access to this resource.
         /// </summary>
         public static string NoAccessMessage {
@@ -831,6 +840,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string PiecesShortcut {
             get {
                 return ResourceManager.GetString("PiecesShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous.
+        /// </summary>
+        public static string Previous {
+            get {
+                return ResourceManager.GetString("Previous", resourceCulture);
             }
         }
         
@@ -993,6 +1011,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string SetYourPassword {
             get {
                 return ResourceManager.GetString("SetYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Showing products {0}-{1} of {2}.
+        /// </summary>
+        public static string ShowingProducts {
+            get {
+                return ResourceManager.GetString("ShowingProducts", resourceCulture);
             }
         }
         

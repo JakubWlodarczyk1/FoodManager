@@ -477,4 +477,13 @@
   <data name="PageSizeInvalid" xml:space="preserve">
     <value>Page size is invalid. Allowed values are {0}.</value>
   </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="ShowingProducts" xml:space="preserve">
+    <value>Showing products {0}-{1} of {2}</value>
+  </data>
 </root>

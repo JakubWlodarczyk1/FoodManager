@@ -8,6 +8,9 @@
 
 @{
     ViewData["Title"] = @Lang.Products;
+    var pageNumber = int.TryParse(ViewContext.HttpContext.Request.Query["PageNumber"], out var pn) ? pn : PaginationDefaults.DefaultPageNumber;
+    var pageSize = int.TryParse(ViewContext.HttpContext.Request.Query["PageSize"], out var ps) ? ps : PaginationDefaults.DefaultPageSize;
+    var searchPhrase = ViewContext.HttpContext.Request.Query["SearchPhrase"];
 }
 
 <h1>@Lang.Products</h1>
@@ -18,26 +21,32 @@
 
 <form method="get" asp-action="Index" class="mb-3">
     <div class="input-group">
-        <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@(ViewContext.HttpContext.Request.Query["SearchPhrase"])"/>
+        <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@searchPhrase" />
+        <input type="hidden" name="PageSize" value="@pageSize" />
+        <input type="hidden" name="PageNumber" value="@pageNumber" />
         <button type="submit" class="btn btn-primary">@Lang.Search</button>
     </div>
 </form>
 
+<p>
+    @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
+</p>
+
 <table class="table">
     <thead>
-        <tr>
-            <th>@Lang.Name</th>
-            <th>@Lang.Description</th>
-            <th>@Lang.Category</th>
-            <th>@Lang.Quantity</th>
-            <th>@Lang.Unit</th>
-            <th>@Lang.Price (PLN)</th>
-            <th>@Lang.ExpirationDate</th>
-            <th>@Lang.Actions</th>
-        </tr>
+    <tr>
+        <th>@Lang.Name</th>
+        <th>@Lang.Description</th>
+        <th>@Lang.Category</th>
+        <th>@Lang.Quantity</th>
+        <th>@Lang.Unit</th>
+        <th>@Lang.Price (PLN)</th>
+        <th>@Lang.ExpirationDate</th>
+        <th>@Lang.Actions</th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Items) {
+    @foreach (var item in Model.Items) {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
@@ -51,6 +60,43 @@
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">@Lang.Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <!-- Pagination Controls on the Left -->
+    <nav aria-label="Search results pages">
+        <ul class="pagination pagination-sm mb-0">
+            <!-- Previous Button -->
+            <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase })">@Lang.Previous</a>
+            </li>
+
+            <!-- Page Numbers -->
+            @for (var i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(pageNumber == i ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase })">@i</a>
+                </li>
+            }
+
+            <!-- Next Button -->
+            <li class="page-item @(pageNumber >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase })">@Lang.Next</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Size Selection on the Right -->
+    <nav aria-label="Search results page size">
+        <ul class="pagination pagination-sm mb-0">
+            @foreach (var size in new[] { 5, 10, 15, 30 })
+            {
+                <li class="page-item @(pageSize == size ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = size, searchPhrase = searchPhrase })">@size</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

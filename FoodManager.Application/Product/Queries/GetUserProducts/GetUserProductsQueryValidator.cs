@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FoodManager.Application.Common;
 using FoodManager.Application.Resources.Localizations;
 
 namespace FoodManager.Application.Product.Queries.GetUserProducts
@@ -8,15 +9,13 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
     /// </summary>
     public class GetUserProductsQueryValidator : AbstractValidator<GetUserProductsQuery>
     {
-        private readonly int[] _allowedPageSizes = [5, 10, 15, 30];
-
         public GetUserProductsQueryValidator()
         {
             RuleFor(p => p.PageNumber)
                 .GreaterThanOrEqualTo(1).WithMessage(Lang.PageNumberGreaterThanOrEqual);
 
             RuleFor(p => p.PageSize)
-                .Must(value => _allowedPageSizes.Contains(value)).WithMessage(string.Format(Lang.PageSizeInvalid, string.Join(", ", _allowedPageSizes)));
+                .Must(value => PaginationDefaults.AllowedPageSizes.Contains(value)).WithMessage(string.Format(Lang.PageSizeInvalid, string.Join(", ", PaginationDefaults.AllowedPageSizes)));
         }
     }
 }
