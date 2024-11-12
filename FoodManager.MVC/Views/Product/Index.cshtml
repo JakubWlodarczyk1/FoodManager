@@ -15,6 +15,14 @@
 <p>
     <a class="btn btn-primary" asp-action="Create">@Lang.AddProduct</a>
 </p>
+
+<form method="get" asp-action="Index" class="mb-3">
+    <div class="input-group">
+        <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@(ViewContext.HttpContext.Request.Query["SearchPhrase"])"/>
+        <button type="submit" class="btn btn-primary">@Lang.Search</button>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>

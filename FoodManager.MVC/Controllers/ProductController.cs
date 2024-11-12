@@ -18,7 +18,7 @@ namespace FoodManager.MVC.Controllers
         /// </summary>
         public async Task<IActionResult> Index([FromQuery] GetUserProductsQuery query)
         {
-            var products = await mediator.Send(new GetUserProductsQuery());
+            var products = await mediator.Send(query);
             return View(products);
         }
 
