@@ -11,6 +11,11 @@
     var pageNumber = int.TryParse(ViewContext.HttpContext.Request.Query["PageNumber"], out var pn) ? pn : PaginationDefaults.DefaultPageNumber;
     var pageSize = int.TryParse(ViewContext.HttpContext.Request.Query["PageSize"], out var ps) ? ps : PaginationDefaults.DefaultPageSize;
     var searchPhrase = ViewContext.HttpContext.Request.Query["SearchPhrase"];
+
+    var maxPagesToShow = 3;
+    var startPage = Math.Max(1, pageNumber - 1);
+    var endPage = Math.Min(Model.TotalPages, pageNumber + 1);
+
 }
 
 <h1>@Lang.Products</h1>
@@ -66,30 +71,54 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <!-- Pagination Controls on the Left -->
-    <nav aria-label="Search results pages">
+    <nav aria-label="Pagination">
         <ul class="pagination pagination-sm mb-0">
             <!-- Previous Button -->
             <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase })">@Lang.Previous</a>
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase })">Previous</a>
             </li>
 
-            <!-- Page Numbers -->
-            @for (var i = 1; i <= Model.TotalPages; i++)
+            <!-- First Page -->
+            @if (startPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = pageSize, searchPhrase = searchPhrase })">1</a>
+                </li>
+                @if (startPage > 2)
+                {
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                }
+            }
+
+            <!-- Main Page Links (Up to 3 Pages) -->
+            @for (int i = startPage; i <= endPage; i++)
             {
                 <li class="page-item @(pageNumber == i ? "active" : "")">
                     <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase })">@i</a>
                 </li>
             }
 
+            <!-- Last Page -->
+            @if (endPage < Model.TotalPages)
+            {
+                @if (endPage < Model.TotalPages - 1)
+                {
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                }
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = Model.TotalPages, pageSize = pageSize, searchPhrase = searchPhrase })">@Model.TotalPages</a>
+                </li>
+            }
+
             <!-- Next Button -->
             <li class="page-item @(pageNumber >= Model.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase })">@Lang.Next</a>
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase })">Next</a>
             </li>
         </ul>
     </nav>
 
     <!-- Page Size Selection on the Right -->
-    <nav aria-label="Search results page size">
+    <nav aria-label="Page size">
         <ul class="pagination pagination-sm mb-0">
             @foreach (var size in @PaginationDefaults.AllowedPageSizes)
             {
