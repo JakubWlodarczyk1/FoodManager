@@ -12,7 +12,9 @@
     var pageSize = int.TryParse(ViewContext.HttpContext.Request.Query["PageSize"], out var ps) ? ps : PaginationDefaults.DefaultPageSize;
     var searchPhrase = ViewContext.HttpContext.Request.Query["SearchPhrase"];
 
-    var maxPagesToShow = 3;
+    var sortBy = ViewContext.HttpContext.Request.Query["SortBy"];
+    var sortDirection = ViewContext.HttpContext.Request.Query["SortDirection"] == "Descending" ? "Ascending" : "Descending";
+
     var startPage = Math.Max(1, pageNumber - 1);
     var endPage = Math.Min(Model.TotalPages, pageNumber + 1);
 
@@ -37,18 +39,93 @@
     @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
 </p>
 
-<table class="table">
+<table class="table table-striped table-bordered">
     <thead>
-    <tr>
-        <th>@Lang.Name</th>
-        <th>@Lang.Description</th>
-        <th>@Lang.Category</th>
-        <th>@Lang.Quantity</th>
-        <th>@Lang.Unit</th>
-        <th>@Lang.Price (PLN)</th>
-        <th>@Lang.ExpirationDate</th>
+        <tr>
+            <th>
+                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = sortDirection })">
+                    @Lang.Name
+                    @if (sortBy == nameof(ProductDto.Name))
+                    {
+                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                    }
+                    else
+                    {
+                        <span class="sort-indicator text-muted">⇅</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = sortDirection })">
+                    @Lang.Description
+                    @if (sortBy == nameof(ProductDto.Description))
+                    {
+                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                    }
+                    else
+                    {
+                        <span class="sort-indicator text-muted">⇅</span>
+                    }
+                </a>
+            </th>
+            <th>
+                @Lang.Category
+
+            </th>
+            <th>
+                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = sortDirection })">
+                    @Lang.Quantity
+                    @if (sortBy == nameof(ProductDto.Quantity))
+                    {
+                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                    }
+                    else
+                    {
+                        <span class="sort-indicator text-muted">⇅</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Unit), sortDirection = sortDirection })">
+                    @Lang.Unit
+                    @if (sortBy == nameof(ProductDto.Unit))
+                    {
+                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                    }
+                    else
+                    {
+                        <span class="sort-indicator text-muted">⇅</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = sortDirection })">
+                    @Lang.Price (PLN)
+                    @if (sortBy == nameof(ProductDto.Price))
+                    {
+                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                    }
+                    else
+                    {
+                        <span class="sort-indicator text-muted">⇅</span>
+                    }
+                </a>
+            </th>
+            <th>
+                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = sortDirection })">
+                    @Lang.ExpirationDate
+                    @if (sortBy == nameof(ProductDto.ExpirationDate))
+                    {
+                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                    }
+                    else
+                    {
+                        <span class="sort-indicator text-muted">⇅</span>
+                    }
+                </a>
+            </th>
         <th>@Lang.Actions</th>
-    </tr>
+        </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.Items) {

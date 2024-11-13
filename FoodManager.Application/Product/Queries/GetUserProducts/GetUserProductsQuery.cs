@@ -1,5 +1,6 @@
 ﻿using FoodManager.Application.Common;
 using FoodManager.Application.Product.Dtos;
+using FoodManager.Domain.Enums;
 using MediatR;
 
 namespace FoodManager.Application.Product.Queries.GetUserProducts
@@ -9,5 +10,7 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
         public string? SearchPhrase { get; set; }
         public int PageNumber { get; set; } = PaginationDefaults.DefaultPageNumber;
         public int PageSize { get; set; } = PaginationDefaults.DefaultPageSize;
+        public string? SortBy { get; set; }
+        public SortDirection SortDirection { get; set; }
     }
 }

@@ -19,7 +19,10 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
         public async Task<PagedResult<ProductDto>> Handle(GetUserProductsQuery request, CancellationToken cancellationToken)
         {
             var user = userContext.GetCurrentUser();
-            var (products, totalCount) = await productRepository.GetUserProductsMatchingSearch(user.Id, request.SearchPhrase, request.PageNumber, request.PageSize);
+            if (!string.IsNullOrEmpty(request.SortBy))
+                request.SortBy = ProductSortingConfiguration.DtoToEntityColumnMap[request.SortBy];
+
+            var (products, totalCount) = await productRepository.GetUserProductsMatchingSearch(user.Id, request.SearchPhrase, request.PageNumber, request.PageSize, request.SortBy, request.SortDirection);
 
             var dtos = mapper.Map<IEnumerable<ProductDto>>(products);
 

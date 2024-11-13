@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FoodManager.Application.Common;
+using FoodManager.Application.Product.Dtos;
 using FoodManager.Application.Resources.Localizations;
 
 namespace FoodManager.Application.Product.Queries.GetUserProducts
@@ -16,6 +17,9 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
 
             RuleFor(p => p.PageSize)
                 .Must(value => PaginationDefaults.AllowedPageSizes.Contains(value)).WithMessage(string.Format(Lang.PageSizeInvalid, string.Join(", ", PaginationDefaults.AllowedPageSizes)));
+
+            RuleFor(p => p.SortBy)
+                .Must(value => ProductSortingConfiguration.AllowedSortByColumnNames.Contains(value)).WithMessage(string.Format(Lang.SortByValidationMessage, string.Join(", ", ProductSortingConfiguration.AllowedSortByColumnNames)));
         }
     }
 }

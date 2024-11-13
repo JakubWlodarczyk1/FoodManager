@@ -1033,6 +1033,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sort by is optional, or must be in {0}..
+        /// </summary>
+        public static string SortByValidationMessage {
+            get {
+                return ResourceManager.GetString("SortByValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a multiple of {0}..
         /// </summary>
         public static string StepValidationMessage {
