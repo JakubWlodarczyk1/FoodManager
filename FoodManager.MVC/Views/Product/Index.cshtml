@@ -43,7 +43,7 @@
     <thead>
         <tr>
             <th>
-                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = sortDirection })">
                     @Lang.Name
                     @if (sortBy == nameof(ProductDto.Name))
                     {
@@ -56,7 +56,7 @@
                 </a>
             </th>
             <th>
-                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = sortDirection })">
                     @Lang.Description
                     @if (sortBy == nameof(ProductDto.Description))
                     {
@@ -73,7 +73,7 @@
 
             </th>
             <th>
-                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = sortDirection })">
                     @Lang.Quantity
                     @if (sortBy == nameof(ProductDto.Quantity))
                     {
@@ -86,7 +86,7 @@
                 </a>
             </th>
             <th>
-                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Unit), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Unit), sortDirection = sortDirection })">
                     @Lang.Unit
                     @if (sortBy == nameof(ProductDto.Unit))
                     {
@@ -99,7 +99,7 @@
                 </a>
             </th>
             <th>
-                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = sortDirection })">
                     @Lang.Price (PLN)
                     @if (sortBy == nameof(ProductDto.Price))
                     {
@@ -112,7 +112,7 @@
                 </a>
             </th>
             <th>
-                <a class="btn text-dark p-0" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = sortDirection })">
                     @Lang.ExpirationDate
                     @if (sortBy == nameof(ProductDto.ExpirationDate))
                     {
