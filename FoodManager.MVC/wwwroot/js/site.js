@@ -15,11 +15,11 @@ const loadTranslations = (culture) => {
 
 const getTranslation = (key) => translations[key] || key;
 
-const renderCategories = (services, container) => {
+const setupCategoryDropdown = (categories, container) => {
     container.empty();
-    services.forEach(service => {
+    categories.forEach(category => {
         container.append(
-            `<li><a class="dropdown-item" data-value="${service.id}">${service.translationKey ? getTranslation(service.translationKey) : service.name}</a></li>`
+            `<li><a class="dropdown-item" data-value="${category.id}">${category.translationKey ? getTranslation(category.translationKey) : category.name}</a></li>`
         );
     });
 
@@ -55,10 +55,10 @@ const loadProductCategories = () => {
         url: `/ProductCategories/GetProductCategories`,
         type: "get",
         success: function (data) {
-            renderCategories(data, container);
+            setupCategoryDropdown(data, container);
         },
         error: function () {
-            console.error("Failed to load services");
+            console.error("Failed to load categories");
         }
     });
 };
@@ -101,5 +101,5 @@ const initializeCategoryFormSubmission = () => {
 // Load translations once when the document is ready
 $(document).ready(function () {
     const currentCulture = $("html").attr("lang") || "en";
-    loadTranslations(currentCulture); // Load translations once here
+    loadTranslations(currentCulture);
 });

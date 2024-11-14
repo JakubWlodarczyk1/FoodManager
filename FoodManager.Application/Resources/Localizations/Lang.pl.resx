@@ -489,4 +489,7 @@
   <data name="SortByValidationMessage" xml:space="preserve">
     <value>Sortowanie jest opcjonalne lub musi być jedną z wartości {0}.</value>
   </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filtry</value>
+  </data>
 </root>

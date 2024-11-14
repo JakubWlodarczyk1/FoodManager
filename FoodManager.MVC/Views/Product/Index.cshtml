@@ -18,22 +18,25 @@
     var startPage = Math.Max(1, pageNumber - 1);
     var endPage = Math.Min(Model.TotalPages, pageNumber + 1);
 
+    var selectedCategoryIds = ViewContext.HttpContext.Request.Query["CategoryIds"].ToArray();
 }
 
 <h1>@Lang.Products</h1>
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">@Lang.AddProduct</a>
-</p>
-
-<form method="get" asp-action="Index" class="mb-3">
-    <div class="input-group">
-        <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@searchPhrase" />
-        <input type="hidden" name="PageSize" value="@pageSize" />
-        <input type="hidden" name="PageNumber" value="@pageNumber" />
-        <button type="submit" class="btn btn-primary">@Lang.Search</button>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <form method="get" asp-action="Index" class="d-flex flex-grow-1 me-3">
+        <div class="input-group">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filtersModal">@Lang.Filters</button>
+            <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@searchPhrase" />
+            <input type="hidden" name="PageSize" value="@pageSize" />
+            <input type="hidden" name="PageNumber" value="@pageNumber" />
+            <button type="submit" class="btn btn-primary">@Lang.Search</button>
+        </div>
+    </form>
+    <div class="ms-auto">
+        <a class="btn btn-primary" asp-action="Create">@Lang.AddProduct</a>
     </div>
-</form>
+</div>
 
 <p>
     @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
@@ -191,3 +194,40 @@
         </ul>
     </nav>
 </div>
+
+<!-- Modal window with filters -->
+<div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="get" asp-action="Index">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filtersModalLabel">@Lang.Filters</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Lang.Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Category filter -->
+                    <h6>@Lang.Category</h6>
+                    <div class="list-group overflow-auto" id="categoryFilterList" aria-labelledby="categoryFilterSection">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="SearchPhrase" value="@searchPhrase" />
+                    <input type="hidden" name="PageSize" value="@pageSize" />
+                    <input type="hidden" name="SortBy" value="@sortBy" />
+                    <input type="hidden" name="SortDirection" value="@sortDirection" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Lang.Close</button>
+                    <button type="submit" class="btn btn-primary">@Lang.Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var selectedCategoryIds = @Html.Raw(Json.Serialize(selectedCategoryIds));
+    </script>
+
+    <link rel="stylesheet" href="~/css/product/index.css">
+    <script src="~/js/Product/index.js"></script>
+}

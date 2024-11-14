@@ -484,6 +484,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filters.
+        /// </summary>
+        public static string Filters {
+            get {
+                return ResourceManager.GetString("Filters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to fruits.
         /// </summary>
         public static string Fruits {

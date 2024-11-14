@@ -66,13 +66,14 @@ namespace FoodManager.Infrastructure.Repositories
         /// <param name="pageNumber">The page number for pagination.</param>
         /// <param name="pageSize">The number of items per page.</param>
         /// <returns>A tuple containing a collection of <see cref="Product"/> that match the search criteria and the total count of matching products.</returns>
-        public async Task<(IEnumerable<Product>, int)> GetUserProductsMatchingSearch(string userId, string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection)
+        public async Task<(IEnumerable<Product>, int)> GetUserProductsMatchingSearch(string userId, string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection, int?[]? categoryIds)
         {
             var searchPhraseLower = searchPhrase?.ToLower();
 
             var baseQuery = dbContext.Products
                 .Where(p =>
                     p.CreatedById == userId &&
+                    (categoryIds == null || categoryIds.Contains(p.CategoryId)) &&
                     (
                         searchPhraseLower == null ||
                         (

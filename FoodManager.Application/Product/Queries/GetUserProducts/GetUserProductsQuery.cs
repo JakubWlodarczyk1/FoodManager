@@ -12,5 +12,6 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
         public int PageSize { get; set; } = PaginationDefaults.DefaultPageSize;
         public string? SortBy { get; set; }
         public SortDirection SortDirection { get; set; }
+        public int[]? CategoryIds { get; set; }
     }
 }

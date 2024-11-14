@@ -489,4 +489,7 @@
   <data name="SortByValidationMessage" xml:space="preserve">
     <value>Sort by is optional, or must be in {0}.</value>
   </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
 </root>
