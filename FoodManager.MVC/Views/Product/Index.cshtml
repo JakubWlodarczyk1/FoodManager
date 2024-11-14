@@ -70,25 +70,11 @@
             </th>
             <th>
                 @Lang.Category
-
             </th>
             <th>
                 <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = sortDirection })">
                     @Lang.Quantity
                     @if (sortBy == nameof(ProductDto.Quantity))
-                    {
-                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
-                    }
-                    else
-                    {
-                        <span class="sort-indicator text-muted">⇅</span>
-                    }
-                </a>
-            </th>
-            <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Unit), sortDirection = sortDirection })">
-                    @Lang.Unit
-                    @if (sortBy == nameof(ProductDto.Unit))
                     {
                         <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
                     }
@@ -133,8 +119,7 @@
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Description)</td>
             <td>@(TranslationHelper.GetTranslatedValue(item.CategoryTranslationKey) ?? item.CategoryName)</td>
-            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-            <td>@item.Unit.GetDisplayName()</td>
+            <td>@Html.DisplayFor(modelItem => item.Quantity) @item.Unit.GetDisplayName()</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td>@item.ExpirationDate.ToString("dd-MM-yyyy")</td>
             <td>

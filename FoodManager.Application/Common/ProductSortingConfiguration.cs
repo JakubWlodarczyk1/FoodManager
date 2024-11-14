@@ -10,7 +10,6 @@ namespace FoodManager.Application.Common
             nameof(ProductDto.Name),
             nameof(ProductDto.Description),
             nameof(ProductDto.Quantity),
-            nameof(ProductDto.Unit),
             nameof(ProductDto.Price),
             nameof(ProductDto.ExpirationDate)
         ];
