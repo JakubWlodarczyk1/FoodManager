@@ -53,7 +53,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(Lang))]
             [DataType(DataType.Password)]
             [Display(Name = "CurrentPassword", ResourceType = typeof(Lang))]
             public string OldPassword { get; set; }
@@ -62,7 +62,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessageResourceName = "RequiredFieldMessage", ErrorMessageResourceType = typeof(Lang))]
             [StringLength(100, ErrorMessageResourceName = "PasswordErrorMessage", ErrorMessageResourceType = typeof(Lang), MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "NewPassword", ResourceType = typeof(Lang))]
