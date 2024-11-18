@@ -34,7 +34,7 @@
                         <span class="text-start" id="dropdownMenuButtonText">@Lang.ChooseCategory</span>
                         <span class="ms-auto dropdown-toggle"></span>
                     </button>
-                    <div class="dropdown-menu p-2 w-100" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu p-2 w-100 overflow-auto" id="selectCategory" aria-labelledby="dropdownMenuButton">
                         <input type="text" class="form-control mb-2" placeholder="@Lang.Search..." id="dropdownSearch">
                         <ul class="list-unstyled mb-0" id="dropdownOptions">
                         </ul>
@@ -84,5 +84,6 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); };
+    <link rel="stylesheet" href="~/css/product/common.css">
     <script src="~/js/Product/create.js"></script>
 }
