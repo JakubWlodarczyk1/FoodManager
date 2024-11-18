@@ -13,7 +13,8 @@
     var searchPhrase = ViewContext.HttpContext.Request.Query["SearchPhrase"];
 
     var sortBy = ViewContext.HttpContext.Request.Query["SortBy"];
-    var sortDirection = ViewContext.HttpContext.Request.Query["SortDirection"] == "Descending" ? "Ascending" : "Descending";
+    var sortDirection = ViewContext.HttpContext.Request.Query["SortDirection"];
+    var nextSortDirection = sortDirection == "Ascending" ? "Descending" : "Ascending";
 
     var startPage = Math.Max(1, pageNumber - 1);
     var endPage = Math.Min(Model.TotalPages, pageNumber + 1);
@@ -29,7 +30,12 @@
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filtersModal">@Lang.Filters</button>
             <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@searchPhrase" />
             <input type="hidden" name="PageSize" value="@pageSize" />
-            <input type="hidden" name="PageNumber" value="@pageNumber" />
+            <input type="hidden" name="SortBy" value="@sortBy" />
+            <input type="hidden" name="SortDirection" value="@sortDirection" />
+            @foreach (var id in selectedCategoryIds)
+            {
+                <input type="hidden" name="CategoryIds" value="@id" />
+            }
             <button type="submit" class="btn btn-primary">@Lang.Search</button>
         </div>
     </form>
@@ -46,11 +52,11 @@
     <thead>
         <tr>
             <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
                     @Lang.Name
                     @if (sortBy == nameof(ProductDto.Name))
                     {
-                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
                     }
                     else
                     {
@@ -59,11 +65,11 @@
                 </a>
             </th>
             <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
                     @Lang.Description
                     @if (sortBy == nameof(ProductDto.Description))
                     {
-                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
                     }
                     else
                     {
@@ -75,11 +81,11 @@
                 @Lang.Category
             </th>
             <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
                     @Lang.Quantity
                     @if (sortBy == nameof(ProductDto.Quantity))
                     {
-                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
                     }
                     else
                     {
@@ -88,11 +94,11 @@
                 </a>
             </th>
             <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
                     @Lang.Price (PLN)
                     @if (sortBy == nameof(ProductDto.Price))
                     {
-                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
                     }
                     else
                     {
@@ -101,11 +107,11 @@
                 </a>
             </th>
             <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = sortDirection })">
+                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
                     @Lang.ExpirationDate
                     @if (sortBy == nameof(ProductDto.ExpirationDate))
                     {
-                        <span class="sort-indicator">@((sortDirection == "Descending") ? "▲" : "▼")</span>
+                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
                     }
                     else
                     {
@@ -113,7 +119,7 @@
                     }
                 </a>
             </th>
-        <th>@Lang.Actions</th>
+            <th>@Lang.Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -140,14 +146,14 @@
         <ul class="pagination pagination-sm mb-0">
             <!-- Previous Button -->
             <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase })">Previous</a>
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">Previous</a>
             </li>
 
             <!-- First Page -->
             @if (startPage > 1)
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = pageSize, searchPhrase = searchPhrase })">1</a>
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">1</a>
                 </li>
                 @if (startPage > 2)
                 {
@@ -159,7 +165,7 @@
             @for (int i = startPage; i <= endPage; i++)
             {
                 <li class="page-item @(pageNumber == i ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase })">@i</a>
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@i</a>
                 </li>
             }
 
@@ -171,13 +177,13 @@
                     <li class="page-item disabled"><span class="page-link">...</span></li>
                 }
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = Model.TotalPages, pageSize = pageSize, searchPhrase = searchPhrase })">@Model.TotalPages</a>
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = Model.TotalPages, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Model.TotalPages</a>
                 </li>
             }
 
             <!-- Next Button -->
             <li class="page-item @(pageNumber >= Model.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase })">Next</a>
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">Next</a>
             </li>
         </ul>
     </nav>
@@ -188,7 +194,7 @@
             @foreach (var size in @PaginationDefaults.AllowedPageSizes)
             {
                 <li class="page-item @(pageSize == size ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = size, searchPhrase = searchPhrase })">@size</a>
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = size, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@size</a>
                 </li>
             }
         </ul>
@@ -213,7 +219,7 @@
                 <div class="modal-footer">
                     <input type="hidden" name="SearchPhrase" value="@searchPhrase" />
                     <input type="hidden" name="PageSize" value="@pageSize" />
-                    <input type="hidden" name="SortBy" value="@sortBy" />
+                    <input type="hidden" name="sortBy" value="@sortBy" />
                     <input type="hidden" name="SortDirection" value="@sortDirection" />
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Lang.Close</button>
                     <button type="submit" class="btn btn-primary">@Lang.Save</button>
