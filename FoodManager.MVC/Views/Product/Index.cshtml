@@ -146,7 +146,7 @@
         <ul class="pagination pagination-sm mb-0">
             <!-- Previous Button -->
             <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">Previous</a>
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Lang.Previous</a>
             </li>
 
             <!-- First Page -->
@@ -183,7 +183,7 @@
 
             <!-- Next Button -->
             <li class="page-item @(pageNumber >= Model.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">Next</a>
+                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Lang.Next</a>
             </li>
         </ul>
     </nav>
