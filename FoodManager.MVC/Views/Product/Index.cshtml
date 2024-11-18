@@ -191,6 +191,9 @@
     <!-- Page Size Selection on the Right -->
     <nav aria-label="Page size">
         <ul class="pagination pagination-sm mb-0">
+            <li class="me-2 d-flex align-items-center">
+                <span>@Lang.ShowPerPage:</span>
+            </li>
             @foreach (var size in @PaginationDefaults.AllowedPageSizes)
             {
                 <li class="page-item @(pageSize == size ? "active" : "")">

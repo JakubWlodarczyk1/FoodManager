@@ -492,4 +492,7 @@
   <data name="Filters" xml:space="preserve">
     <value>Filtry</value>
   </data>
+  <data name="ShowPerPage" xml:space="preserve">
+    <value>Pokaż na stronie</value>
+  </data>
 </root>

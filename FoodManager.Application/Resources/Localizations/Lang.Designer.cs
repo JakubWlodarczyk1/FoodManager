@@ -1033,6 +1033,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ShowPerPage {
+            get {
+                return ResourceManager.GetString("ShowPerPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to snacks.
         /// </summary>
         public static string Snacks {
