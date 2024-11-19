@@ -103,3 +103,8 @@ $(document).ready(function () {
     const currentCulture = $("html").attr("lang") || "en";
     loadTranslations(currentCulture);
 });
+
+
+// Initialize all tooltips
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));

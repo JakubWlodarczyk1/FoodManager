@@ -20,3 +20,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.tooltip {
+    pointer-events: none;
+}
+
+.custom-warning-tooltip {
+    --bs-tooltip-bg: #ffc107;
+    --bs-tooltip-color: #fff;
+}
+
+.custom-danger-tooltip {
+    --bs-tooltip-bg: #dc3545;
+    --bs-tooltip-color: #fff;
+}

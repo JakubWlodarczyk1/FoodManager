@@ -495,4 +495,10 @@
   <data name="ShowPerPage" xml:space="preserve">
     <value>Show per page</value>
   </data>
+  <data name="ProductExpired" xml:space="preserve">
+    <value>Product expired</value>
+  </data>
+  <data name="ProductExpiringSoon" xml:space="preserve">
+    <value>Product expiring soon</value>
+  </data>
 </root>

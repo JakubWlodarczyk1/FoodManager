@@ -871,6 +871,24 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Product expired.
+        /// </summary>
+        public static string ProductExpired {
+            get {
+                return ResourceManager.GetString("ProductExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product expiring soon.
+        /// </summary>
+        public static string ProductExpiringSoon {
+            get {
+                return ResourceManager.GetString("ProductExpiringSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Products.
         /// </summary>
         public static string Products {
@@ -1033,7 +1051,7 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Show per page.
         /// </summary>
         public static string ShowPerPage {
             get {

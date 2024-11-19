@@ -123,20 +123,38 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Items) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Description)</td>
-            <td>@(TranslationHelper.GetTranslatedValue(item.CategoryTranslationKey) ?? item.CategoryName)</td>
-            <td>@Html.DisplayFor(modelItem => item.Quantity) @item.Unit.GetDisplayName()</td>
-            <td>@Html.DisplayFor(modelItem => item.Price)</td>
-            <td>@item.ExpirationDate.ToString("dd-MM-yyyy")</td>
-            <td>
-                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">@Lang.Edit</a>
-                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">@Lang.Delete</a>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model.Items)
+        {
+            var isExpiringSoon = item.ExpirationDate <= DateTime.Now.AddDays(3) && item.ExpirationDate >= DateTime.Now;
+            var isExpired = item.ExpirationDate < DateTime.Now;
+
+            <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : "")) style">
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                <td>@(TranslationHelper.GetTranslatedValue(item.CategoryTranslationKey) ?? item.CategoryName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity) @item.Unit.GetDisplayName()</td>
+                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                <td>
+                    @item.ExpirationDate.ToString("dd-MM-yyyy")
+                    @if (isExpired)
+                    {
+                        <span class="text-danger ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-danger-tooltip" data-bs-title="@Lang.ProductExpired">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </span>
+                    }
+                    else if (isExpiringSoon)
+                    {
+                        <span class="text-warning ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-warning-tooltip" data-bs-title="@Lang.ProductExpiringSoon">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">@Lang.Edit</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">@Lang.Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
