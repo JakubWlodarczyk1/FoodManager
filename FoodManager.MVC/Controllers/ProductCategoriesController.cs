@@ -1,5 +1,8 @@
 ﻿using FoodManager.Application.ProductCategory.Commands.CreateProductCategory;
 using FoodManager.Application.ProductCategory.Queries.GetUserProductCategories;
+using FoodManager.Application.Resources.Localizations;
+using FoodManager.MVC.Extensions;
+using FoodManager.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +26,7 @@ namespace FoodManager.MVC.Controllers
             }
 
             var data = await mediator.Send(command);
+            this.SetNotification(NotificationType.Success, string.Format(Lang.CreateCategorySuccessNotification, command.Name));
 
             return Ok(data);
         }

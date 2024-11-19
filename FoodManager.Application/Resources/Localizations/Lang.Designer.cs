@@ -88,6 +88,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added product: {0}.
+        /// </summary>
+        public static string AddedProductNotification {
+            get {
+                return ResourceManager.GetString("AddedProductNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new.
         /// </summary>
         public static string AddNew {
@@ -241,6 +250,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created product category: {0}.
+        /// </summary>
+        public static string CreateCategorySuccessNotification {
+            get {
+                return ResourceManager.GetString("CreateCategorySuccessNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a new account..
         /// </summary>
         public static string CreateNewAccount {
@@ -336,6 +354,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string DeleteProductConfirmationMessage {
             get {
                 return ResourceManager.GetString("DeleteProductConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product has been deleted.
+        /// </summary>
+        public static string DeleteProductSuccessNotification {
+            get {
+                return ResourceManager.GetString("DeleteProductSuccessNotification", resourceCulture);
             }
         }
         
@@ -871,6 +898,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edited product: {0}.
+        /// </summary>
+        public static string ProductEditedNotification {
+            get {
+                return ResourceManager.GetString("ProductEditedNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product expired.
         /// </summary>
         public static string ProductExpired {
@@ -1065,6 +1101,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string Snacks {
             get {
                 return ResourceManager.GetString("Snacks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something went wrong!.
+        /// </summary>
+        public static string SomethingWentWrongNotification {
+            get {
+                return ResourceManager.GetString("SomethingWentWrongNotification", resourceCulture);
             }
         }
         

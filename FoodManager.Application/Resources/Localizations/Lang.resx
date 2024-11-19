@@ -501,4 +501,19 @@
   <data name="ProductExpiringSoon" xml:space="preserve">
     <value>Product expiring soon</value>
   </data>
+  <data name="AddedProductNotification" xml:space="preserve">
+    <value>Added product: {0}</value>
+  </data>
+  <data name="ProductEditedNotification" xml:space="preserve">
+    <value>Edited product: {0}</value>
+  </data>
+  <data name="DeleteProductSuccessNotification" xml:space="preserve">
+    <value>Product has been deleted</value>
+  </data>
+  <data name="CreateCategorySuccessNotification" xml:space="preserve">
+    <value>Created product category: {0}</value>
+  </data>
+  <data name="SomethingWentWrongNotification" xml:space="preserve">
+    <value>Something went wrong!</value>
+  </data>
 </root>

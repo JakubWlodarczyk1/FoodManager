@@ -13,7 +13,16 @@ const loadTranslations = (culture) => {
     });
 };
 
-const getTranslation = (key) => translations[key] || key;
+function getTranslation(key, ...values)
+{
+    let translation = translations[key] || key;
+
+    values.forEach((value, index) => {
+        translation = translation.replace(`{${index}}`, value);
+    });
+
+    return translation;
+} 
 
 const setupCategoryDropdown = (categories, container) => {
     container.empty();
@@ -80,6 +89,8 @@ const initializeCategoryFormSubmission = () => {
                 $("#createProductCategoryModal").modal("hide");
                 $("#dropdownMenuButtonText").text(data.name);
                 $("#selectedCategory").val(data.id);
+
+                toastr["success"](getTranslation("CreateCategorySuccessNotification", data.name));
             },
             error: function (xhr) {
                 if (xhr.status === 400) {
@@ -91,7 +102,7 @@ const initializeCategoryFormSubmission = () => {
                         $form.find(`[data-valmsg-for='${key}']`).text(messages.join(", "));
                     });
                 } else {
-                    console.error("An unexpected error occurred.");
+                    toastr["error"](getTranslation("SomethingWentWrongNotification"));
                 }
             }
         });
@@ -103,7 +114,6 @@ $(document).ready(function () {
     const currentCulture = $("html").attr("lang") || "en";
     loadTranslations(currentCulture);
 });
-
 
 // Initialize all tooltips
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');

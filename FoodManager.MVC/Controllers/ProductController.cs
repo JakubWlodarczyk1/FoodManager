@@ -4,9 +4,13 @@ using FoodManager.Application.Product.Commands.DeleteProduct;
 using FoodManager.Application.Product.Commands.EditProduct;
 using FoodManager.Application.Product.Queries.GetProductById;
 using FoodManager.Application.Product.Queries.GetUserProducts;
+using FoodManager.Application.Resources.Localizations;
+using FoodManager.MVC.Extensions;
+using FoodManager.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FoodManager.MVC.Controllers
 {
@@ -44,6 +48,8 @@ namespace FoodManager.MVC.Controllers
             }
 
             await mediator.Send(command);
+            this.SetNotification(NotificationType.Success, string.Format(Lang.AddedProductNotification, command.Name));
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -82,6 +88,8 @@ namespace FoodManager.MVC.Controllers
             }
 
             await mediator.Send(command);
+            this.SetNotification(NotificationType.Success, string.Format(Lang.ProductEditedNotification, command.Name));
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -92,6 +100,8 @@ namespace FoodManager.MVC.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await mediator.Send(new DeleteProductCommand(id));
+            this.SetNotification(NotificationType.Success, Lang.DeleteProductSuccessNotification);
+
             return RedirectToAction(nameof(Index));
         }
     }
