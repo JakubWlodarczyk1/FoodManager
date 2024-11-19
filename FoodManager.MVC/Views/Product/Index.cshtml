@@ -48,9 +48,9 @@
     @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
 </p>
 
-<table class="table table-striped table-bordered">
+<table class="table table-hover">
     <thead>
-        <tr>
+        <tr class="table-light">
             <th>
                 <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
                     @Lang.Name
@@ -122,13 +122,13 @@
             <th>@Lang.Actions</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
         @foreach (var item in Model.Items)
         {
             var isExpiringSoon = item.ExpirationDate <= DateTime.Now.AddDays(3) && item.ExpirationDate >= DateTime.Now;
             var isExpired = item.ExpirationDate < DateTime.Now;
 
-            <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : "")) style">
+            <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.Description)</td>
                 <td>@(TranslationHelper.GetTranslatedValue(item.CategoryTranslationKey) ?? item.CategoryName)</td>
