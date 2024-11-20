@@ -28,7 +28,7 @@ namespace FoodManager.Application.Product.Dtos
         public Unit Unit { get; set; }
 
         [Display(Name = "Price", ResourceType = typeof(Lang))]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [Display(Name = "ExpirationDate", ResourceType = typeof(Lang))]
         public DateTime ExpirationDate { get; set; }

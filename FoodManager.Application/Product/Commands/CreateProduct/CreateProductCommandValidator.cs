@@ -21,7 +21,6 @@ namespace FoodManager.Application.Product.Commands.CreateProduct
                 .InclusiveBetween(1, 10000).WithMessage(Lang.RangeValidationMessage);
 
             RuleFor(p => p.Price)
-                .NotEmpty().WithMessage(string.Format(Lang.RequiredFieldMessage, Lang.Price))
                 .InclusiveBetween(0, 10000).WithMessage(Lang.RangeValidationMessage);
 
             RuleFor(p => p.ExpirationDate)

@@ -14,7 +14,7 @@ namespace FoodManager.Domain.Entities
 
         public int Quantity { get; set; }
         public Unit Unit { get; set; }
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
         public DateTime ExpirationDate { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
