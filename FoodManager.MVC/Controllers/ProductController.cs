@@ -31,7 +31,13 @@ namespace FoodManager.MVC.Controllers
         /// </summary>
         public IActionResult Create()
         {
-            return View();
+            var defaultModel = new CreateProductCommand()
+            {
+                Quantity = 1,
+                ExpirationDate = DateTime.Now
+            };
+
+            return View(defaultModel);
         }
 
         /// <summary>
