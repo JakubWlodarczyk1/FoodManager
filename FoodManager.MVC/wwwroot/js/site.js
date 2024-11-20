@@ -36,6 +36,8 @@ const setupCategoryDropdown = (categories, container) => {
     const dropdownButton = $("#dropdownMenuButtonText");
     const selectedCategory = $("#selectedCategory");
     const resetCategory = $("#resetCategory");
+    const categoryName = $("#categoryName");
+    const categoryTranslationKey = $("#categoryTranslationKey");
 
     searchInput.on("input", function () {
         const query = $(this).val().toLowerCase();
@@ -46,14 +48,26 @@ const setupCategoryDropdown = (categories, container) => {
 
     container.on("click", ".dropdown-item", function (e) {
         e.preventDefault();
+
+        const value = $(this).data("value");
+        const category = categories.find(c => c.id == value);
+
         dropdownButton.text($(this).text());
-        selectedCategory.val($(this).data("value"));
+        selectedCategory.val(value);
+
+        if (category) {
+            categoryName.val(category.name);
+            categoryTranslationKey.val(category.translationKey);
+        }
     });
 
     resetCategory.on("click", function (e) {
         e.preventDefault();
         selectedCategory.val("");
         dropdownButton.text(getTranslation("ChooseCategory"));
+
+        categoryName.val("");
+        categoryTranslationKey.val("");
     });
 };
 
