@@ -130,8 +130,8 @@
     <tbody class="table-group-divider">
         @foreach (var item in Model.Items)
         {
-            var isExpiringSoon = item.ExpirationDate <= DateTime.Now.AddDays(3) && item.ExpirationDate >= DateTime.Now;
-            var isExpired = item.ExpirationDate < DateTime.Now;
+            var isExpiringSoon = item.ExpirationDate <= DateTime.Now.AddDays(3).Date && item.ExpirationDate >= DateTime.Now.Date;
+            var isExpired = item.ExpirationDate < DateTime.Now.Date;
 
             <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
