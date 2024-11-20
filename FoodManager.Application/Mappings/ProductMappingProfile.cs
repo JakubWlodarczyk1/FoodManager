@@ -28,6 +28,9 @@ namespace FoodManager.Application.Mappings
                 .ReverseMap();
 
             CreateMap<Domain.Entities.ProductCategory, ProductCategoryResultDto>();
+
+            CreateMap<decimal, TotalProductsPriceDto>()
+                .ForMember(dto => dto.TotalPrice, opt => opt.MapFrom(src => src));
         }
     }
 }

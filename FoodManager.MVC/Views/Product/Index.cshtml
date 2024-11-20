@@ -44,8 +44,13 @@
     </div>
 </div>
 
-<p>
-    @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
+<p class="d-flex justify-content-between">
+    <span>
+        @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
+    </span>
+    <span id="totalProductsPrice">
+        <!-- Total price will be dynamically updated -->
+    </span>
 </p>
 
 <table class="table table-hover">

@@ -100,5 +100,10 @@ namespace FoodManager.Infrastructure.Repositories
 
             return (products, totalCount);
         }
+
+        public async Task<decimal> GetUserTotalProductsPrice(string userId)
+        {
+            return await dbContext.Products.Where(p => p.CreatedById == userId).SumAsync(p => p.Price) ?? default;
+        }
     }
 }

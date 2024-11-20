@@ -4,13 +4,13 @@ using FoodManager.Application.Product.Commands.DeleteProduct;
 using FoodManager.Application.Product.Commands.EditProduct;
 using FoodManager.Application.Product.Queries.GetProductById;
 using FoodManager.Application.Product.Queries.GetUserProducts;
+using FoodManager.Application.Product.Queries.GetUserTotalProductsPrice;
 using FoodManager.Application.Resources.Localizations;
 using FoodManager.MVC.Extensions;
 using FoodManager.MVC.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace FoodManager.MVC.Controllers
 {
@@ -109,6 +109,18 @@ namespace FoodManager.MVC.Controllers
             this.SetNotification(NotificationType.Success, Lang.DeleteProductSuccessNotification);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        /// <summary>
+        /// Retrieves the total price of all products associated with the current user.
+        /// </summary>
+        /// <returns>Returns the total price as a numeric value.</returns>
+        [HttpGet]
+        [Route("Products/TotalPrice")]
+        public async Task<IActionResult> GetUserTotalProductsPrice()
+        {
+            var data = await mediator.Send(new GetUserTotalProductsPriceQuery());
+            return Ok(data);
         }
     }
 }

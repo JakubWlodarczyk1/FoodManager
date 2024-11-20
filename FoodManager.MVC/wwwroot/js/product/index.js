@@ -38,6 +38,22 @@ const setupCategoryFilter = (categories, container) => {
     });
 };
 
+const loadTotalPrice = () => {
+    const container = $("#totalProductsPrice");
+
+    $.ajax({
+        url: `/Products/TotalPrice`,
+        type: "get",
+        success: function (data) {
+            container.text(getTranslation("TotalProductsPrice", data.totalPrice));
+        },
+        error: function () {
+            console.error("Failed to load services");
+        }
+    });
+};
+
 $(document).ready(function () {
     loadProductCategoriesFilters();
+    loadTotalPrice();
 });

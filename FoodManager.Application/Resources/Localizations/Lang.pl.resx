@@ -516,4 +516,7 @@
   <data name="SomethingWentWrongNotification" xml:space="preserve">
     <value>Coś poszło nie tak!</value>
   </data>
+  <data name="TotalProductsPrice" xml:space="preserve">
+    <value>Całkowita cena wszystkich produktów: {0} PLN</value>
+  </data>
 </root>

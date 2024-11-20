@@ -1141,6 +1141,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string TotalProductsPrice {
+            get {
+                return ResourceManager.GetString("TotalProductsPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Uncategorized.
         /// </summary>
         public static string Uncategorized {
