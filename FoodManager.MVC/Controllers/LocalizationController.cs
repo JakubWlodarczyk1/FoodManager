@@ -9,7 +9,7 @@ namespace FoodManager.MVC.Controllers
         /// <summary>
         /// Changes the application's language based on the provided culture code.
         /// </summary>
-        /// <param name="lang">The culture code to switch to.</param>
+        /// <param name="lang">The culture code.</param>
         public IActionResult ChangeLanguage(string lang)
         {
             if (string.IsNullOrEmpty(lang))

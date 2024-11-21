@@ -10,11 +10,10 @@ namespace FoodManager.Application.Product.Queries.GetUserProducts
     public class GetUserProductsQueryHandler(IProductRepository productRepository, IMapper mapper, IUserContext userContext) : IRequestHandler<GetUserProductsQuery, PagedResult<ProductDto>>
     {
         /// <summary>
-        /// Processes the <see cref="GetUserProductsQuery"/> and returns a paginated list of <see cref="ProductDto"/> for the current user,
-        /// filtered by an optional search phrase.
+        /// Handles getting a paginated list of products for the current user based on the provided query.
         /// </summary>
         /// <param name="request">The query request containing search phrase and pagination parameters.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
         /// <returns>A <see cref="PagedResult{ProductDto}"/> containing a paginated collection of <see cref="ProductDto"/> associated with the current user.</returns>
         public async Task<PagedResult<ProductDto>> Handle(GetUserProductsQuery request, CancellationToken cancellationToken)
         {

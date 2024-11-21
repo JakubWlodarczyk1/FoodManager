@@ -11,7 +11,7 @@ namespace FoodManager.Application.Mappings
         /// <summary>
         /// Configures mappings between domain entities and DTOs.
         /// </summary>
-        /// <param name="userContext">Provides information about the current user.</param>
+        /// <param name="userContext">Current user context.</param>
         public ProductMappingProfile(IUserContext userContext)
         {
             var user = userContext.GetCurrentUser();

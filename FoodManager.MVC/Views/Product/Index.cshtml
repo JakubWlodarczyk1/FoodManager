@@ -49,7 +49,7 @@
         @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
     </span>
     <span id="totalProductsPrice">
-        <!-- Total price will be dynamically updated -->
+        <!-- Total price will be dynamically updated here -->
     </span>
 </p>
 
@@ -185,7 +185,7 @@
             }
 
             <!-- Main Page Links (Up to 3 Pages) -->
-            @for (int i = startPage; i <= endPage; i++)
+            @for (var i = startPage; i <= endPage; i++)
             {
                 <li class="page-item @(pageNumber == i ? "active" : "")">
                     <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@i</a>

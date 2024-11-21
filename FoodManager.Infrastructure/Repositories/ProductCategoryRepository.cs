@@ -10,7 +10,7 @@ namespace FoodManager.Infrastructure.Repositories
     internal class ProductCategoryRepository(FoodManagerDbContext dbContext) : IProductCategoryRepository
     {
         /// <summary>
-        /// Adds a new product category to the database.
+        /// Add a new product category to the database.
         /// </summary>
         /// <param name="productCategory">The product category to add.</param>
         public async Task Create(ProductCategory productCategory)
@@ -20,17 +20,17 @@ namespace FoodManager.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Retrieves product categories associated with the specified user.
+        /// Get all product categories associated with the specified user, including base categories.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
-        /// <returns>A collection of <see cref="ProductCategory"/>.</returns>
+        /// <returns>The collection of <see cref="ProductCategory"/>.</returns>
         public async Task<IEnumerable<ProductCategory>> GetUserProductCategories(string userId)
         {
             return await dbContext.ProductCategories.Where(c => c.Type == CategoryType.Base || c.CreatedById == userId).ToListAsync();
         }
 
         /// <summary>
-        /// Retrieves a product category by name and user ID.
+        /// Get a product category by its name and associated user ID. 
         /// </summary>
         /// <param name="name">The name of the product category.</param>
         /// <param name="userId">The ID of the user.</param>

@@ -9,7 +9,6 @@ namespace FoodManager.Domain.Interfaces
         Task Update(Product product);
         Task Delete(Product product);
         Task<Product?> GetById(int id);
-        Task<IEnumerable<Product>> GetAll();
         Task<(IEnumerable<Product>, int)> GetUserProductsMatchingSearch(string userId, string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection, int?[]? categoryIds);
         Task<decimal> GetUserTotalProductsPrice(string userId);
     }

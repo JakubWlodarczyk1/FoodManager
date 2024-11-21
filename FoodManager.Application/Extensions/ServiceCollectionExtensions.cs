@@ -5,7 +5,6 @@ using FluentValidation.AspNetCore;
 using FoodManager.Application.ApplicationUser;
 using FoodManager.Application.Mappings;
 using FoodManager.Application.Product.Commands.CreateProduct;
-using FoodManager.Application.Product.Commands.EditProduct;
 
 namespace FoodManager.Application.Extensions
 {

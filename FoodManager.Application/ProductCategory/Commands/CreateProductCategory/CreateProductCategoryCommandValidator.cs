@@ -11,7 +11,7 @@ namespace FoodManager.Application.ProductCategory.Commands.CreateProductCategory
         /// Initializes a new instance of the <see cref="CreateProductCategoryCommandValidator"/> class and sets up validation rules.
         /// </summary>
         /// <param name="repository">Repository for product category data operations.</param>
-        /// <param name="userContext">Provides information about the current user.</param>
+        /// <param name="userContext">Current user context.</param>
         public CreateProductCategoryCommandValidator(IProductCategoryRepository repository, IUserContext userContext)
         {
             RuleFor(c => c.Name)

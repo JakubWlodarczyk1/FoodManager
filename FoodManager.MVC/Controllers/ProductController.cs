@@ -18,7 +18,7 @@ namespace FoodManager.MVC.Controllers
     public class ProductController(IMediator mediator, IMapper mapper) : Controller
     {
         /// <summary>
-        /// Displays a list of products associated with the current user.
+        /// Displays the main product management view with a list of products associated with the current user.
         /// </summary>
         public async Task<IActionResult> Index([FromQuery] GetUserProductsQuery query)
         {
@@ -81,7 +81,7 @@ namespace FoodManager.MVC.Controllers
         /// <summary>
         /// Edit an existing product.
         /// </summary>
-        /// <param name="id">The ID of the product being edited.</param>
+        /// <param name="id">The ID of the product to be edited.</param>
         /// <param name="command">The command containing updated product details.</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,7 +102,7 @@ namespace FoodManager.MVC.Controllers
         /// <summary>
         /// Deletes a specified product.
         /// </summary>
-        /// <param name="id">The ID of the product to delete.</param>
+        /// <param name="id">The ID of the product to be deleted.</param>
         public async Task<IActionResult> Delete(int id)
         {
             await mediator.Send(new DeleteProductCommand(id));
@@ -112,9 +112,9 @@ namespace FoodManager.MVC.Controllers
         }
 
         /// <summary>
-        /// Retrieves the total price of all products associated with the current user.
+        /// Get the total price of all products associated with the current user.
         /// </summary>
-        /// <returns>Returns the total price as a numeric value.</returns>
+        /// <returns>The total price of the user's products.</returns>
         [HttpGet]
         [Route("Products/TotalPrice")]
         public async Task<IActionResult> GetUserTotalProductsPrice()

@@ -11,7 +11,7 @@ namespace FoodManager.Application.Product.Commands.DeleteProduct
         /// </summary>
         /// <param name="request">The command containing the product ID to delete.</param>
         /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
-        /// <returns>A <see cref="Unit"/> task representing the asynchronous operation.</returns>
+        /// <returns>A task representing the asynchronous operation.</returns>
         public async Task Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             var product = await productRepository.GetById(request.Id);

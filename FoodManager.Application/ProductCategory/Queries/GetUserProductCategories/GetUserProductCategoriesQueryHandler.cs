@@ -13,7 +13,7 @@ namespace FoodManager.Application.ProductCategory.Queries.GetUserProductCategori
         /// </summary>
         /// <param name="request">The query containing request details.</param>
         /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
-        /// <returns>A collection of <see cref="ProductCategoryDto"/> representing the user's product categories.</returns>
+        /// <returns>The collection of <see cref="ProductCategoryDto"/> representing the user's product categories.</returns>
         public async Task<IEnumerable<ProductCategoryDto>> Handle(GetUserProductCategoriesQuery request, CancellationToken cancellationToken)
         {
             var currentUser = userContext.GetCurrentUser();

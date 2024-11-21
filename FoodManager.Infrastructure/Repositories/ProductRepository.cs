@@ -10,7 +10,7 @@ namespace FoodManager.Infrastructure.Repositories
     internal class ProductRepository(FoodManagerDbContext dbContext) : IProductRepository
     {
         /// <summary>
-        /// Adds a new product to the database.
+        /// Add a new product to the database.
         /// </summary>
         /// <param name="product">The product to add.</param>
         public async Task Create(Product product)
@@ -20,7 +20,7 @@ namespace FoodManager.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Updates an existing product in the database.
+        /// Update an existing product in the database.
         /// </summary>
         /// <param name="product">The product to update.</param>
         public async Task Update(Product product)
@@ -30,7 +30,7 @@ namespace FoodManager.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Deletes a product from the database.
+        /// Delete a product from the database.
         /// </summary>
         /// <param name="product">The product to delete.</param>
         public async Task Delete(Product product)
@@ -40,7 +40,7 @@ namespace FoodManager.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Retrieves a product by its ID.
+        /// Get a product by its ID.
         /// </summary>
         /// <param name="id">The ID of the product.</param>
         /// <returns>The <see cref="Product"/>, or null if not found.</returns>
@@ -50,21 +50,16 @@ namespace FoodManager.Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Retrieves all products from the database.
-        /// </summary>
-        /// <returns>A collection of all <see cref="Product"/>.</returns>
-        public async Task<IEnumerable<Product>> GetAll()
-        {
-            return await dbContext.Products.ToListAsync();
-        }
-
-        /// <summary>
-        /// Retrieves products created by the specified user, filtered by an optional search phrase, with pagination support.
+        /// Get products created by the specified user, optionally filtered by a search phrase, 
+        /// with support for pagination, sorting, and category filtering.
         /// </summary>
         /// <param name="userId">The ID of the user.</param>
         /// <param name="searchPhrase">The optional search phrase to filter products by name or description.</param>
         /// <param name="pageNumber">The page number for pagination.</param>
         /// <param name="pageSize">The number of items per page.</param>
+        /// <param name="sortBy">The property by which to sort the products. Use <c>null</c> to disable sorting and return the products in their default order.</param>
+        /// <param name="sortDirection">The direction of sorting.</param>
+        /// <param name="categoryIds">Optional array of category IDs to filter products by. Use <c>null</c> for no category filtering, and include <c>null</c> in the array to include uncategorized products.</param>
         /// <returns>A tuple containing a collection of <see cref="Product"/> that match the search criteria and the total count of matching products.</returns>
         public async Task<(IEnumerable<Product>, int)> GetUserProductsMatchingSearch(string userId, string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection, int?[]? categoryIds)
         {
@@ -101,6 +96,11 @@ namespace FoodManager.Infrastructure.Repositories
             return (products, totalCount);
         }
 
+        /// <summary>
+        /// Get the total price of all products created by the specified user.
+        /// </summary>
+        /// <param name="userId">The ID of the user.</param>
+        /// <returns>The total price of the user's products.</returns>
         public async Task<decimal> GetUserTotalProductsPrice(string userId)
         {
             return await dbContext.Products.Where(p => p.CreatedById == userId).SumAsync(p => p.Price) ?? default;

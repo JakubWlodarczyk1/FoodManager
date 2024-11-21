@@ -17,10 +17,10 @@ namespace FoodManager.Infrastructure.Localization
         ];
 
         /// <summary>
-        /// Retrieves all translations for the specified culture.
+        /// Gets all translations as key-value pairs for the specified culture.
         /// </summary>
         /// <param name="culture">The culture identifier.</param>
-        /// <returns>A dictionary containing translation key-value pairs for the specified culture.</returns>
+        /// <returns>The dictionary containing translation key-value pairs for the specified culture.</returns>
         public static Dictionary<string, string> GetTranslations(string culture)
         {
             return Translations.GetOrAdd(culture, _ =>
@@ -50,11 +50,11 @@ namespace FoodManager.Infrastructure.Localization
         }
 
         /// <summary>
-        /// Determines whether the specified translation matches any translation in the defined cultures.
+        /// Checks if the specified translation key corresponds to the given translation value in any of the defined cultures.
         /// </summary>
         /// <param name="key">The translation key to look up.</param>
         /// <param name="targetTranslation">The translation value to compare.</param>
-        /// <returns><c>true</c> if the translation matches in any defined culture; otherwise, <c>false</c>.</returns>
+        /// <returns><c>true</c> if the key's translation matches the specified value in any of the defined cultures; otherwise, <c>false</c>.</returns>
         public static bool IsTranslationEqualInAnyDefinedCulture(string key, string targetTranslation)
         {
             if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(targetTranslation))
@@ -74,10 +74,10 @@ namespace FoodManager.Infrastructure.Localization
         }
 
         /// <summary>
-        /// Retrieves the translated value for a given key from resource files.
+        /// Get the translated value for a given key from resource files.
         /// </summary>
         /// <param name="key">The resource key for the translation.</param>
-        /// <returns>The translated string, or null if the key is null or empty.</returns>
+        /// <returns>The translated string if the key exists; otherwise, <c>null</c>.</returns>
         public static string? GetTranslatedValue(string? key)
         {
             return string.IsNullOrEmpty(key) ? null : Lang.ResourceManager.GetString(key);

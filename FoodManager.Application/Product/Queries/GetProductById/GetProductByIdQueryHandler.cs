@@ -8,11 +8,11 @@ namespace FoodManager.Application.Product.Queries.GetProductById
     public class GetProductByIdQueryHandler(IProductRepository productRepository, IMapper mapper) : IRequestHandler<GetProductByIdQuery, ProductDto>
     {
         /// <summary>
-        /// Processes the <see cref="GetProductByIdQuery"/> and returns the corresponding <see cref="ProductDto"/>.
+        /// Handles getting a product based on provided query.
         /// </summary>
         /// <param name="request">The query request containing the product ID.</param>
-        /// <param name="cancellationToken">Cancellation token.</param>
-        /// <returns>A collection of <see cref="ProductDto"/>.</returns>
+        /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
+        /// <returns>The <see cref="ProductDto"/> representing the requested product.</returns>
         public async Task<ProductDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
             var product =  await productRepository.GetById(request.Id);

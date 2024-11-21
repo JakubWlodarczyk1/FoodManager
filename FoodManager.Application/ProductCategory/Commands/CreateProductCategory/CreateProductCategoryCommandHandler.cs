@@ -13,7 +13,7 @@ namespace FoodManager.Application.ProductCategory.Commands.CreateProductCategory
         /// </summary>
         /// <param name="request">The command containing product category details.</param>
         /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
-        /// <returns>A <see cref="ProductCategoryResultDto"/> representing the created product category.</returns>
+        /// <returns>The <see cref="ProductCategoryResultDto"/> representing the created product category.</returns>
         public async Task<ProductCategoryResultDto> Handle(CreateProductCategoryCommand request, CancellationToken cancellationToken)
         {
             var productCategory = mapper.Map<Domain.Entities.ProductCategory>(request);

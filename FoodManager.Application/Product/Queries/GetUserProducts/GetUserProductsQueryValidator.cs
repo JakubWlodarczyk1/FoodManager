@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FoodManager.Application.Common;
-using FoodManager.Application.Product.Dtos;
 using FoodManager.Application.Resources.Localizations;
 
 namespace FoodManager.Application.Product.Queries.GetUserProducts

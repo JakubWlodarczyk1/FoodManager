@@ -1,5 +1,4 @@
-﻿using FoodManager.Application.Resources.Localizations;
-using FoodManager.Domain.Interfaces;
+﻿using FoodManager.Domain.Interfaces;
 using FoodManager.Infrastructure.Localization;
 using FoodManager.Infrastructure.Persistence;
 using FoodManager.Infrastructure.Repositories;
@@ -14,10 +13,10 @@ namespace FoodManager.Infrastructure.Extensions
     public static class ServiceCollectionExtension
     {
         /// <summary>
-        /// Configures and registers infrastructure services including database context, repositories, identity, and seeders.
+        /// Configures and registers infrastructure services for the application, including database context, repositories, identity configuration and seeders.
         /// </summary>
-        /// <param name="services">The service collection to add services to.</param>
-        /// <param name="configuration">The application configuration.</param>
+        /// <param name="services">The service collection to which the services will be added.</param>
+        /// <param name="configuration">The application configuration providing necessary settings.</param>
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<FoodManagerDbContext>(options => options.UseSqlServer(

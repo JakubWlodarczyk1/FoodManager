@@ -25,7 +25,7 @@ namespace FoodManager.Application.Extensions
         /// <summary>
         /// Generates a list of translated select list items for all available units.
         /// </summary>
-        /// <returns>A collection of <see cref="SelectListItem"/> representing each unit.</returns>
+        /// <returns>A collection of translated <see cref="SelectListItem"/> representing each unit.</returns>
         public static IEnumerable<SelectListItem> GetUnitSelectList()
         {
             return Enum.GetValues(typeof(Unit))
