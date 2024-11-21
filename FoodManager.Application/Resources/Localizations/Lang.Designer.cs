@@ -1141,7 +1141,7 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Total price of all products: {0} PLN.
         /// </summary>
         public static string TotalProductsPrice {
             get {
@@ -1263,6 +1263,24 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your food inventory efficiently, track expiration dates, and reduce food waste. Start managing your pantry now!.
+        /// </summary>
+        public static string WelcomeDescription {
+            get {
+                return ResourceManager.GetString("WelcomeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to FoodManager!.
+        /// </summary>
+        public static string WelcomeToFoodManager {
+            get {
+                return ResourceManager.GetString("WelcomeToFoodManager", resourceCulture);
             }
         }
     }

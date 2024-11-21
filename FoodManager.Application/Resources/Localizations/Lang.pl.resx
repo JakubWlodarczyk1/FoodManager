@@ -519,4 +519,10 @@
   <data name="TotalProductsPrice" xml:space="preserve">
     <value>Całkowita cena wszystkich produktów: {0} PLN</value>
   </data>
+  <data name="WelcomeToFoodManager" xml:space="preserve">
+    <value>Witaj w FoodManager!</value>
+  </data>
+  <data name="WelcomeDescription" xml:space="preserve">
+    <value>Zarządzaj swoimi zapasami jedzenia, śledź daty ważności i ogranicz marnowanie żywności. Rozpocznij zarządzanie zapasami już teraz!</value>
+  </data>
 </root>
