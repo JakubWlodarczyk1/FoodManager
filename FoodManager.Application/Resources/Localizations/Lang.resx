@@ -525,4 +525,7 @@
   <data name="WelcomeDescription" xml:space="preserve">
     <value>Manage your food inventory efficiently, track expiration dates, and reduce food waste. Start managing your pantry now!</value>
   </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
 </root>

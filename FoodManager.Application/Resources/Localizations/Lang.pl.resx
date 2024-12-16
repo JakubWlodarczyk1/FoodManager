@@ -525,4 +525,7 @@
   <data name="WelcomeDescription" xml:space="preserve">
     <value>Zarządzaj swoimi zapasami jedzenia, śledź daty ważności i ogranicz marnowanie żywności. Rozpocznij zarządzanie zapasami już teraz!</value>
   </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Zarządzaj</value>
+  </data>
 </root>
