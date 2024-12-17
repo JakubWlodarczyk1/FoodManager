@@ -528,4 +528,16 @@
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
   </data>
+  <data name="PasswordChangedSuccess" xml:space="preserve">
+    <value>Your password has been changed.</value>
+  </data>
+  <data name="UserPasswordChangeSuccess" xml:space="preserve">
+    <value>User changed their password successfully.</value>
+  </data>
+  <data name="UserLoadError" xml:space="preserve">
+    <value>Unable to load user with ID '{0}'.</value>
+  </data>
+  <data name="UserDeletionUnexpectedError" xml:space="preserve">
+    <value>Unexpected error occurred deleting user.</value>
+  </data>
 </root>

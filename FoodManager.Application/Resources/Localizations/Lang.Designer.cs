@@ -628,7 +628,7 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Manage.
         /// </summary>
         public static string Manage {
             get {
@@ -795,6 +795,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been changed..
+        /// </summary>
+        public static string PasswordChangedSuccess {
+            get {
+                return ResourceManager.GetString("PasswordChangedSuccess", resourceCulture);
             }
         }
         
@@ -1222,6 +1231,24 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unexpected error occurred deleting user..
+        /// </summary>
+        public static string UserDeletionUnexpectedError {
+            get {
+                return ResourceManager.GetString("UserDeletionUnexpectedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to load user with ID &apos;{0}&apos;..
+        /// </summary>
+        public static string UserLoadError {
+            get {
+                return ResourceManager.GetString("UserLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lockout is not enabled for this user..
         /// </summary>
         public static string UserLockoutNotEnabled {
@@ -1254,6 +1281,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string UserNotInRole {
             get {
                 return ResourceManager.GetString("UserNotInRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User changed their password successfully..
+        /// </summary>
+        public static string UserPasswordChangeSuccess {
+            get {
+                return ResourceManager.GetString("UserPasswordChangeSuccess", resourceCulture);
             }
         }
         

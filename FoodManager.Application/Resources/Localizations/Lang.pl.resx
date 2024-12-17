@@ -528,4 +528,16 @@
   <data name="Manage" xml:space="preserve">
     <value>Zarządzaj</value>
   </data>
+  <data name="PasswordChangedSuccess" xml:space="preserve">
+    <value>Twoje hasło zostało zmienione.</value>
+  </data>
+  <data name="UserPasswordChangeSuccess" xml:space="preserve">
+    <value>Użytkownik pomyślnie zmienił hasło.</value>
+  </data>
+  <data name="UserLoadError" xml:space="preserve">
+    <value>Nie można załadować użytkownika o ID '{0}'.</value>
+  </data>
+  <data name="UserDeletionUnexpectedError" xml:space="preserve">
+    <value>Wystąpił nieoczekiwany błąd podczas usuwania użytkownika.</value>
+  </data>
 </root>

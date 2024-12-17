@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using FoodManager.Application.Resources.Localizations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -61,7 +62,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound(string.Format(Lang.UserLoadError, _userManager.GetUserId(User)));
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -73,7 +74,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound(string.Format(Lang.UserLoadError, _userManager.GetUserId(User)));
             }
 
             RequirePassword = await _userManager.HasPasswordAsync(user);
@@ -81,7 +82,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             {
                 if (!await _userManager.CheckPasswordAsync(user, Input.Password))
                 {
-                    ModelState.AddModelError(string.Empty, "Incorrect password.");
+                    ModelState.AddModelError(string.Empty, Lang.PasswordMismatch);
                     return Page();
                 }
             }
@@ -90,7 +91,7 @@ namespace FoodManager.MVC.Areas.Identity.Pages.Account.Manage
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred deleting user.");
+                throw new InvalidOperationException(Lang.UserDeletionUnexpectedError);
             }
 
             await _signInManager.SignOutAsync();
