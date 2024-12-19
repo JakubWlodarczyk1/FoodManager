@@ -21,6 +21,12 @@ namespace FoodManager.Infrastructure.Persistence
                 .Property(c => c.Type)
                 .HasConversion<string>();
 
+            modelBuilder.Entity<ProductCategory>()
+                .HasOne(c => c.CreatedBy)
+                .WithMany()
+                .HasForeignKey(c => c.CreatedById)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany()
