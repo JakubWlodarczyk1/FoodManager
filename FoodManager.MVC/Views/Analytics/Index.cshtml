@@ -1,0 +1,127 @@
+﻿@using FoodManager.Application.Resources.Localizations
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = Lang.Analytics;
+    var qFrom = ViewContext.HttpContext.Request.Query["From"].ToString();
+    var qTo = ViewContext.HttpContext.Request.Query["To"].ToString();
+
+    DateTime defFrom = DateTime.Today;
+    DateTime defTo = DateTime.Today.AddDays(30);
+
+    string fromIso = string.IsNullOrWhiteSpace(qFrom) ? defFrom.ToString("yyyy-MM-dd") : qFrom;
+    string toIso = string.IsNullOrWhiteSpace(qTo) ? defTo.ToString("yyyy-MM-dd") : qTo;
+
+    string fromDisplay = DateTime.Parse(fromIso).ToString("dd.MM.yyyy");
+    string toDisplay = DateTime.Parse(toIso).ToString("dd.MM.yyyy");
+
+    var selectedCategoryIds = ViewContext.HttpContext.Request.Query["CategoryIds"].ToArray();
+}
+
+<h1>@(Lang.Analytics)</h1>
+
+<div class="mb-3">
+    <form class="w-100">
+        <div class="input-group w-100">
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filtersModal">
+                @Lang.Filters
+            </button>
+
+            <input class="form-control" type="text" readonly value="@fromDisplay → @toDisplay" />
+
+            <button type="button" class="btn btn-secondary" onclick="window.print()">
+                @Lang.Print
+            </button>
+        </div>
+    </form>
+</div>
+
+
+<p class="d-flex justify-content-between">
+    <span>@(Lang.ExpiringProductsOverTime)</span>
+    <span>
+        <strong>@(Lang.Total):</strong> <span id="totalSpan">0</span>
+    </span>
+</p>
+
+<div class="row g-3">
+    <div class="col-12 col-lg-6">
+        <div class="card">
+            <div class="card-header">@Lang.Chart</div>
+            <div class="card-body">
+                <canvas id="expChart" class="chart" height="180"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6">
+        <div class="card" id="printTableCard">
+            <div class="card-header">@Lang.Table</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-hover align-middle" id="expTable">
+                        <thead>
+                        <tr class="table-light">
+                            <th>@Lang.Date</th>
+                            <th class="text-end">@Lang.ProductsCount</th>
+                        </tr>
+                        </thead>
+                        <tbody><!-- rows injected dynamically --></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="get" asp-action="Index">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filtersModalLabel">@Lang.Filters</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Lang.Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">@Lang.From</label>
+                        <input type="date" class="form-control" id="fromInput" name="From" value="@fromIso" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">@Lang.To</label>
+                        <input type="date" class="form-control" id="toInput" name="To" value="@toIso" />
+                    </div>
+
+                    <h6>@Lang.Category</h6>
+                    <div class="list-group overflow-auto" id="categoryFilterList" style="max-height: 300px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @foreach (var id in selectedCategoryIds)
+                    {
+                        <input type="hidden" name="CategoryIds" value="@id" />
+                    }
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Lang.Close</button>
+                    <button type="submit" class="btn btn-primary">@Lang.Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var selectedCategoryIds = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(selectedCategoryIds));
+        var initialFrom = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(fromIso));
+        var initialTo   = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(toIso));
+        var i18n = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new {
+                ExpiringProducts = Lang.ExpiringProducts,
+                FetchError = Lang.FetchError,
+                Date = Lang.Date,
+                ProductsCount = Lang.ProductsCount
+            }));
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="~/js/Analytics/index.js"></script>
+    <link rel="stylesheet" href="~/css/Analytics/index.css" />
+}

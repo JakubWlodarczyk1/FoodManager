@@ -11,5 +11,6 @@ namespace FoodManager.Domain.Interfaces
         Task<Product?> GetById(int id);
         Task<(IEnumerable<Product>, int)> GetUserProductsMatchingSearch(string userId, string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection, int?[]? categoryIds);
         Task<decimal> GetUserTotalProductsPrice(string userId);
+        Task<IReadOnlyList<(DateOnly Date, int Count)>> GetExpiringProductsDailyCounts(string userId, DateOnly from, DateOnly to, int?[]? categoryIds, bool includeOutOfStock, CancellationToken cancellationToken);
     }
 }

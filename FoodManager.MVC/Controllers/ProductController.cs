@@ -63,6 +63,7 @@ namespace FoodManager.MVC.Controllers
         /// Displays the edit view for a specific product.
         /// </summary>
         /// <param name="id">The ID of the product to edit.</param>
+        [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Product/{id:int}/Edit")]
         public async Task<IActionResult> Edit(int id)
         {
@@ -83,6 +84,7 @@ namespace FoodManager.MVC.Controllers
         /// </summary>
         /// <param name="id">The ID of the product to be edited.</param>
         /// <param name="command">The command containing updated product details.</param>
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Product/{id:int}/Edit")]

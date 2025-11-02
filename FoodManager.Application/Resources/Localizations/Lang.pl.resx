@@ -540,4 +540,43 @@
   <data name="UserDeletionUnexpectedError" xml:space="preserve">
     <value>Wystąpił nieoczekiwany błąd podczas usuwania użytkownika.</value>
   </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>Analiza</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Pokaż</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Drukuj</value>
+  </data>
+  <data name="ExpiringProductsOverTime" xml:space="preserve">
+    <value>Liczba produktów z kończącym się terminem ważności w czasie</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Suma</value>
+  </data>
+  <data name="Chart" xml:space="preserve">
+    <value>Wykres</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Tabela</value>
+  </data>
+  <data name="ProductsCount" xml:space="preserve">
+    <value>Liczba produktów</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Od</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Do</value>
+  </data>
+  <data name="ExpiringProducts" xml:space="preserve">
+    <value>Produkty z kończącym się terminem ważnośc</value>
+  </data>
+  <data name="FetchError" xml:space="preserve">
+    <value>Failed to load analytical data</value>
+  </data>
 </root>
