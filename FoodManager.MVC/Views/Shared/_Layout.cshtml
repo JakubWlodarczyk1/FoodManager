@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark @(controller == "Product" && action == "Create"? "active" : string.Empty)" asp-area="" asp-controller="Product" asp-action="Create">@Lang.AddProduct</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark @(controller == "Analytics" && action == "Index"? "active" : string.Empty)" asp-area="" asp-controller="Analytics" asp-action="Index">@Lang.Analytics</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav text-end">
                         <li class="nav-item dropdown">

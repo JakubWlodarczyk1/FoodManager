@@ -105,5 +105,44 @@ namespace FoodManager.Infrastructure.Repositories
         {
             return await dbContext.Products.Where(p => p.CreatedById == userId).SumAsync(p => p.Price) ?? default;
         }
+
+        public async Task<IReadOnlyList<(DateOnly Date, int Count)>> GetExpiringProductsDailyCounts(string userId, DateOnly from, DateOnly to, int?[]? categoryIds, bool includeOutOfStock, CancellationToken cancellationToken)
+        {
+            var fromDt = from.ToDateTime(TimeOnly.MinValue);
+            var toDt = to.ToDateTime(TimeOnly.MaxValue);
+
+            var q = dbContext.Products
+                .AsNoTracking()
+                .Where(p => p.CreatedById == userId)
+                .Where(p => p.ExpirationDate >= fromDt && p.ExpirationDate <= toDt);
+
+            if (categoryIds is { Length: > 0 })
+            {
+                var hasNull = categoryIds.Any(id => id is null);
+                var nonNull = categoryIds.Where(id => id is not null).Select(id => id!.Value).ToArray();
+
+                if (hasNull && nonNull.Length > 0)
+                    q = q.Where(p => (p.CategoryId == null) || (nonNull.Contains(p.CategoryId.Value)));
+                else if (hasNull)
+                    q = q.Where(p => p.CategoryId == null);
+                else
+                    q = q.Where(p => p.CategoryId != null && nonNull.Contains(p.CategoryId.Value));
+            }
+
+            if (!includeOutOfStock)
+                q = q.Where(p => p.Quantity > 0);
+
+            var data = await q
+                .GroupBy(p => DateOnly.FromDateTime(p.ExpirationDate))
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    Count = g.Sum(p => p.Unit == Domain.Enums.Unit.Pieces ? (int)p.Quantity : 1)
+                })
+                .OrderBy(x => x.Date)
+                .ToListAsync(cancellationToken);
+
+            return data.Select(x => (x.Date, x.Count)).ToList();
+        }
     }
 }

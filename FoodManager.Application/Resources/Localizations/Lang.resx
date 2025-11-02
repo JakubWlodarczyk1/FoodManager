@@ -540,4 +540,43 @@
   <data name="UserDeletionUnexpectedError" xml:space="preserve">
     <value>Unexpected error occurred deleting user.</value>
   </data>
+  <data name="Analytics" xml:space="preserve">
+    <value>Analytics</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ExpiringProductsOverTime" xml:space="preserve">
+    <value>Number of expiring products over time</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Chart" xml:space="preserve">
+    <value>Chart</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="ProductsCount" xml:space="preserve">
+    <value>Number of products</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="ExpiringProducts" xml:space="preserve">
+    <value>Expiring products</value>
+  </data>
+  <data name="FetchError" xml:space="preserve">
+    <value>Nie udało się pobrać danych analitycznych</value>
+  </data>
 </root>

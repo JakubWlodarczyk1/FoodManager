@@ -32,9 +32,15 @@ namespace FoodManager.MVC.Controllers
         /// Get all translations for the specified culture.
         /// </summary>
         /// <param name="culture">The culture code.</param>
+        [HttpGet]
+        [Route("[controller]/[action]")]
         public IActionResult GetTranslations(string culture)
         {
             var translations = TranslationHelper.GetTranslations(culture);
+
+            if (translations.Count == 0)
+                return BadRequest($"Culture '{culture}' is not supported.");
+
             return Json(translations);
         }
     }

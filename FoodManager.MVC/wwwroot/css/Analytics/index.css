@@ -1,0 +1,86 @@
+﻿.analysis-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px) {
+    .analysis-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.card {
+    border: 1px solid #e5e5e5;
+}
+
+.card-header {
+    padding: .75rem 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.table-hover tbody tr:hover {
+    background: #f7f7f7;
+    cursor: pointer;
+}
+
+@media print {
+
+    .row {
+        display: block !important;
+    }
+
+    [class*="col-"] {
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .analysis-grid {
+        display: block !important;
+    }
+
+    .card-header {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .table-responsive {
+        overflow: visible !important;
+    }
+
+    table {
+        page-break-inside: auto !important;
+        border-collapse: collapse !important;
+    }
+
+    thead {
+        display: table-header-group !important;
+    }
+
+    tfoot {
+        display: table-footer-group !important;
+    }
+
+    tr {
+        page-break-inside: auto !important;
+    }
+
+    nav, .filters, .btn, .modal, .breadcrumb, .navbar, footer {
+        display: none !important;
+    }
+
+    #expChart {
+        width: 100% !important;
+        height: 220px !important;
+    }
+
+    .card .card-body {
+        padding: 8px !important;
+    }
+}

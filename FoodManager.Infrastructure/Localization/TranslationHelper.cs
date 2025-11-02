@@ -23,6 +23,12 @@ namespace FoodManager.Infrastructure.Localization
         /// <returns>The dictionary containing translation key-value pairs for the specified culture.</returns>
         public static Dictionary<string, string> GetTranslations(string culture)
         {
+            if (string.IsNullOrWhiteSpace(culture) ||
+                !DefinedCultures.Any(c => c.Name.Equals(culture, StringComparison.OrdinalIgnoreCase)))
+            {
+                return new Dictionary<string, string>();
+            }
+
             return Translations.GetOrAdd(culture, _ =>
             {
                 var translationDict = new Dictionary<string, string>();

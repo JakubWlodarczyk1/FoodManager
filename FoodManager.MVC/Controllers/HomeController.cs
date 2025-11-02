@@ -11,6 +11,7 @@ namespace FoodManager.MVC.Controllers
         /// <summary>
         /// Displays the home page.
         /// </summary>
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Index()
         {
             return View();
