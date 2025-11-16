@@ -19,8 +19,7 @@ namespace FoodManager.Infrastructure.Migrations
                 table: "ProductCategories",
                 column: "CreatedById",
                 principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
