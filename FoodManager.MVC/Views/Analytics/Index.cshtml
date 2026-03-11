@@ -1,5 +1,6 @@
 ﻿@using FoodManager.Application.Resources.Localizations
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using FoodManager.MVC.Models
 
 @{
     ViewData["Title"] = Lang.Analytics;
@@ -18,7 +19,13 @@
     var selectedCategoryIds = ViewContext.HttpContext.Request.Query["CategoryIds"].ToArray();
 }
 
-<h1>@(Lang.Analytics)</h1>
+@await Html.PartialAsync("_Breadcrumbs", new List<BreadcrumbItemViewModel>
+{
+    new() { Title = Lang.HomePage, Url = Url.Action("Index", "Home") },
+    new() { Title = Lang.Analytics }
+})
+
+<h1>@Lang.Analytics</h1>
 
 <div class="mb-3">
     <form class="w-100">
@@ -27,7 +34,8 @@
                 @Lang.Filters
             </button>
 
-            <input class="form-control" type="text" readonly value="@fromDisplay → @toDisplay" />
+            <label for="dateRangeSummary" class="visually-hidden">@Lang.DateRange</label>
+            <input id="dateRangeSummary" class="form-control" type="text" readonly value="@fromDisplay → @toDisplay" />
 
             <button type="button" class="btn btn-secondary" onclick="window.print()">
                 @Lang.Print
@@ -36,11 +44,10 @@
     </form>
 </div>
 
-
 <p class="d-flex justify-content-between">
-    <span>@(Lang.ExpiringProductsOverTime)</span>
+    <span>@Lang.ExpiringProductsOverTime</span>
     <span>
-        <strong>@(Lang.Total):</strong> <span id="totalSpan">0</span>
+        <strong>@Lang.Total:</strong> <span id="totalSpan">0</span>
     </span>
 </p>
 
@@ -53,6 +60,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-12 col-lg-6">
         <div class="card" id="printTableCard">
             <div class="card-header">@Lang.Table</div>
@@ -60,10 +68,10 @@
                 <div class="table-responsive">
                     <table class="table table-sm table-striped table-hover align-middle" id="expTable">
                         <thead>
-                        <tr class="table-light">
-                            <th>@Lang.Date</th>
-                            <th class="text-end">@Lang.ProductsCount</th>
-                        </tr>
+                            <tr class="table-light">
+                                <th>@Lang.Date</th>
+                                <th class="text-end">@Lang.ProductsCount</th>
+                            </tr>
                         </thead>
                         <tbody><!-- rows injected dynamically --></tbody>
                     </table>
@@ -78,28 +86,34 @@
         <div class="modal-content">
             <form method="get" asp-action="Index">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filtersModalLabel">@Lang.Filters</h5>
+                    <div class="modal-title h5 mb-0" id="filtersModalLabel">@Lang.Filters</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Lang.Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">@Lang.From</label>
+                        <label class="form-label" for="fromInput">@Lang.From</label>
                         <input type="date" class="form-control" id="fromInput" name="From" value="@fromIso" />
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label">@Lang.To</label>
+                        <label class="form-label" for="toInput">@Lang.To</label>
                         <input type="date" class="form-control" id="toInput" name="To" value="@toIso" />
                     </div>
 
-                    <h6>@Lang.Category</h6>
-                    <div class="list-group overflow-auto" id="categoryFilterList" style="max-height: 300px;">
-                    </div>
+                    <fieldset class="mb-0">
+                        <legend class="h6 mb-2">@Lang.Category</legend>
+                        <div class="list-group overflow-auto" id="categoryFilterList" style="max-height: 300px;">
+                        </div>
+                    </fieldset>
                 </div>
+
                 <div class="modal-footer">
                     @foreach (var id in selectedCategoryIds)
                     {
                         <input type="hidden" name="CategoryIds" value="@id" />
                     }
+
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Lang.Close</button>
                     <button type="submit" class="btn btn-primary">@Lang.Save</button>
                 </div>
@@ -112,8 +126,9 @@
     <script>
         var selectedCategoryIds = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(selectedCategoryIds));
         var initialFrom = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(fromIso));
-        var initialTo   = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(toIso));
-        var i18n = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new {
+        var initialTo = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(toIso));
+        var i18n = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(new
+            {
                 ExpiringProducts = Lang.ExpiringProducts,
                 FetchError = Lang.FetchError,
                 Date = Lang.Date,

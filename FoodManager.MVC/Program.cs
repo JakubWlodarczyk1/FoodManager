@@ -15,9 +15,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 var scope = app.Services.CreateScope();
-var seeder = scope.ServiceProvider.GetRequiredService<ProductCategorySeeder>();
+var categorySeeder = scope.ServiceProvider.GetRequiredService<ProductCategorySeeder>();
+await categorySeeder.Seed();
 
-await seeder.Seed();
+var identitySeeder = scope.ServiceProvider.GetRequiredService<IdentitySeeder>();
+await identitySeeder.Seed();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -40,6 +42,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.Use(async (context, next) =>
 {

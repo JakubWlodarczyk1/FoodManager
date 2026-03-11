@@ -6,7 +6,7 @@ namespace FoodManager.Application.ApplicationUser
     public class UserContext(IHttpContextAccessor httpContextAccessor) : IUserContext
     {
         /// <summary>
-        /// Retrieves basic information (id and email) about the currently authenticated user.
+        /// Retrieves basic information (id, email and roles) about the currently authenticated user.
         /// </summary>
         public CurrentUser GetCurrentUser()
         {
@@ -23,8 +23,9 @@ namespace FoodManager.Application.ApplicationUser
 
             var id = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
             var email = user.FindFirst(c => c.Type == ClaimTypes.Email)!.Value;
+            var roles = user.FindAll(ClaimTypes.Role).Select(c => c.Value);
 
-            return new CurrentUser(id, email);
+            return new CurrentUser(id, email, roles);
         }
     }
 }

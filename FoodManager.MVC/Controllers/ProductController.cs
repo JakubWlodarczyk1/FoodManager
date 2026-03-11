@@ -65,16 +65,18 @@ namespace FoodManager.MVC.Controllers
         /// <param name="id">The ID of the product to edit.</param>
         [ApiExplorerSettings(IgnoreApi = true)]
         [Route("Product/{id:int}/Edit")]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, string? returnUrl)
         {
-            var productDto = await mediator.Send(new GetProductByIdQuery(id));
+            var product = await mediator.Send(new GetProductByIdQuery(id));
 
-            if (!productDto.IsEditable)
-            {
-                return RedirectToAction("NoAccess", "Home");
-            }
+            if (product is null)
+                return NotFound();
 
-            var model = mapper.Map<EditProductCommand>(productDto);
+            if (!product.IsEditable)
+                return Forbid();
+
+            var model = mapper.Map<EditProductCommand>(product);
+            model.ReturnUrl = returnUrl;
 
             return View(model);
         }
@@ -97,6 +99,9 @@ namespace FoodManager.MVC.Controllers
 
             await mediator.Send(command);
             this.SetNotification(NotificationType.Success, string.Format(Lang.ProductEditedNotification, command.Name));
+
+            if (!string.IsNullOrWhiteSpace(command.ReturnUrl) && Url.IsLocalUrl(command.ReturnUrl))
+                return Redirect(command.ReturnUrl);
 
             return RedirectToAction(nameof(Index));
         }

@@ -1,0 +1,79 @@
+﻿@using FoodManager.Application.Resources.Localizations
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+
+@{
+    ViewData["Title"] = Lang.Users;
+}
+
+@await Html.PartialAsync("_Breadcrumbs", new List<BreadcrumbItemViewModel>
+{
+    new() { Title = Lang.HomePage, Url = Url.Action("Index", "Home") },
+    new() { Title = Lang.AdminPanel, Url = Url.Action("Index", "Admin") },
+    new() { Title = Lang.Users }
+})
+
+<div class="container py-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1 class="mb-1">@Lang.Users</h1>
+            <p class="text-muted mb-0">@Lang.UsersListDescription</p>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-secondary">@Lang.Back</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>@Lang.Email</th>
+                            <th>@Lang.Blocked</th>
+                            <th>@Lang.Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model)
+                        {
+                            var isLocked = user.LockoutEnd.HasValue && user.LockoutEnd > DateTimeOffset.UtcNow;
+
+                            <tr>
+                                <td>@user.Email</td>
+                                <td>
+                                    @if (isLocked)
+                                    {
+                                        <span class="text-danger fw-semibold">@Lang.Yes</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="fw-semibold">@Lang.No</span>
+                                    }
+                                </td>
+                                <td>
+                                    <form asp-action="ToggleLockout" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                        @if (isLocked)
+                                        {
+                                            <button type="submit" class="btn btn-sm btn-success">
+                                                @Lang.Unblock
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                @Lang.Block
+                                            </button>
+                                        }
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

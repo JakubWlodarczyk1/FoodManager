@@ -1,0 +1,114 @@
+﻿@using FoodManager.Application.Extensions
+@using FoodManager.Application.Resources.Localizations
+@using FoodManager.Infrastructure.Localization
+@using FoodManager.MVC.Models
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model IEnumerable<AdminProductViewModel>
+
+@{
+    ViewData["Title"] = Lang.Products;
+}
+
+@await Html.PartialAsync("_Breadcrumbs", new List<BreadcrumbItemViewModel>
+{
+    new() { Title = Lang.HomePage, Url = Url.Action("Index", "Home") },
+    new() { Title = Lang.AdminPanel, Url = Url.Action("Index", "Admin") },
+    new() { Title = Lang.AllProducts }
+})
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="mb-1">@Lang.AllProducts</h1>
+            <p class="text-muted mb-0">@Lang.AllProductsDescription</p>
+        </div>
+        <a asp-action="Index" class="btn btn-outline-secondary">@Lang.Back</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <caption class="visually-hidden">@Lang.AdminProductsTableCaption</caption>
+                    <thead>
+                        <tr class="table-light">
+                            <th>@Lang.Name</th>
+                            <th>@Lang.Description</th>
+                            <th>@Lang.Category</th>
+                            <th>@Lang.Quantity</th>
+                            <th>@Lang.Price (PLN)</th>
+                            <th>@Lang.ExpirationDate</th>
+                            <th>@Lang.Email</th>
+                            <th>@Lang.Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach (var product in Model)
+                        {
+                            var isExpiringSoon = product.ExpirationDate <= DateTime.Now.AddDays(3).Date && product.ExpirationDate >= DateTime.Now.Date;
+                            var isExpired = product.ExpirationDate < DateTime.Now.Date;
+
+                            <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
+                                <td>@product.Name</td>
+                                <td>@product.Description</td>
+                                <td>@(TranslationHelper.GetTranslatedValue(product.CategoryTranslationKey) ?? product.CategoryName)</td>
+                                <td>@product.Quantity @product.Unit.GetDisplayName()</td>
+                                <td>@(product.Price?.ToString("0.00") ?? "-")</td>
+                                <td>
+                                    @product.ExpirationDate.ToString("dd-MM-yyyy")
+                                    @if (isExpired)
+                                    {
+                                        <span class="text-danger ms-2"
+                                              data-bs-toggle="tooltip"
+                                              data-bs-placement="top"
+                                              data-bs-custom-class="custom-danger-tooltip"
+                                              data-bs-title="@Lang.ProductExpired"
+                                              aria-label="@Lang.ProductExpired"
+                                              role="img">
+                                            <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                                        </span>
+                                    }
+                                    else if (isExpiringSoon)
+                                    {
+                                        <span class="text-warning ms-2"
+                                              data-bs-toggle="tooltip"
+                                              data-bs-placement="top"
+                                              data-bs-custom-class="custom-warning-tooltip"
+                                              data-bs-title="@Lang.ProductExpiringSoon"
+                                              aria-label="@Lang.ProductExpiringSoon"
+                                              role="img">
+                                            <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                                        </span>
+                                    }
+                                </td>
+                                <td>@product.CreatedByEmail</td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a asp-controller="Product"
+                                           asp-action="Edit"
+                                           asp-route-id="@product.Id"
+                                           asp-route-returnUrl="@Url.Action("Products", "Admin")"
+                                           class="btn btn-primary btn-sm">
+                                            @Lang.Edit
+                                        </a>
+
+                                        <form asp-action="DeleteProduct" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@product.Id" />
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">
+                                                @Lang.Delete
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

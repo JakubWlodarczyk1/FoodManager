@@ -34,5 +34,6 @@ namespace FoodManager.Application.Product.Dtos
         public DateTime ExpirationDate { get; set; }
 
         public bool IsEditable { get; set; }
+        public string? ReturnUrl { get; set; }
     }
 }

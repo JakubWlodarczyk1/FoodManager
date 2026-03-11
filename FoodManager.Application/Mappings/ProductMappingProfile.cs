@@ -4,6 +4,8 @@ using FoodManager.Application.Product.Commands.EditProduct;
 using FoodManager.Application.Product.Dtos;
 using FoodManager.Application.ProductCategory.Dtos;
 
+using FoodManager.Domain.Constants;
+
 namespace FoodManager.Application.Mappings
 {
     public class ProductMappingProfile : Profile
@@ -18,7 +20,7 @@ namespace FoodManager.Application.Mappings
 
             CreateMap<ProductDto, Domain.Entities.Product>();
             CreateMap<Domain.Entities.Product, ProductDto>()
-                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => src.CreatedById == user.Id))
+                .ForMember(dto => dto.IsEditable, opt => opt.MapFrom(src => src.CreatedById == user.Id || user.IsInRole(Roles.Admin)))
                 .ForMember(dto => dto.CategoryName, opt => opt.MapFrom(src => src.Category == null ? null : src.Category.Name))
                 .ForMember(dto => dto.CategoryTranslationKey, opt => opt.MapFrom(src => src.Category == null ? null : src.Category.TranslationKey));
 

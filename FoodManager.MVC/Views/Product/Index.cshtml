@@ -4,6 +4,7 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using FoodManager.Application.Product.Dtos
 @using FoodManager.Infrastructure.Localization
+@using FoodManager.MVC.Models
 @model PagedResult<ProductDto>
 
 @{
@@ -22,13 +23,20 @@
     var selectedCategoryIds = ViewContext.HttpContext.Request.Query["CategoryIds"].ToArray();
 }
 
+@await Html.PartialAsync("_Breadcrumbs", new List<BreadcrumbItemViewModel>
+{
+    new() { Title = Lang.HomePage, Url = Url.Action("Index", "Home") },
+    new() { Title = Lang.Products }
+})
+
 <h1>@Lang.Products</h1>
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <form method="get" asp-action="Index" class="d-flex flex-grow-1 me-3">
         <div class="input-group">
             <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#filtersModal">@Lang.Filters</button>
-            <input class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@searchPhrase" />
+            <label for="SearchPhrase" class="visually-hidden">@Lang.Search</label>
+            <input id="SearchPhrase" class="form-control" type="text" name="SearchPhrase" placeholder="@Lang.Search..." value="@searchPhrase" />
             <input type="hidden" name="PageSize" value="@pageSize" />
             <input type="hidden" name="SortBy" value="@sortBy" />
             <input type="hidden" name="SortDirection" value="@sortDirection" />
@@ -46,201 +54,222 @@
 
 <p class="d-flex justify-content-between">
     <span>
-        @string.Format(Lang.ShowingProducts, @Model.ItemsFrom, @Model.ItemsTo, @Model.TotalItemsCount)
+        @if (Model.Items.Any())
+        {
+            @string.Format(Lang.ShowingProducts, Model.ItemsFrom, Model.ItemsTo, Model.TotalItemsCount)
+        }
     </span>
     <span id="totalProductsPrice">
         <!-- Total price will be dynamically updated here -->
     </span>
 </p>
 
-<table class="table table-hover">
-    <thead>
-        <tr class="table-light">
-            <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
-                    @Lang.Name
-                    @if (sortBy == nameof(ProductDto.Name))
-                    {
-                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
-                    }
-                    else
-                    {
-                        <span class="sort-indicator text-muted">⇅</span>
-                    }
-                </a>
-            </th>
-            <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
-                    @Lang.Description
-                    @if (sortBy == nameof(ProductDto.Description))
-                    {
-                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
-                    }
-                    else
-                    {
-                        <span class="sort-indicator text-muted">⇅</span>
-                    }
-                </a>
-            </th>
-            <th>
-                @Lang.Category
-            </th>
-            <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
-                    @Lang.Quantity
-                    @if (sortBy == nameof(ProductDto.Quantity))
-                    {
-                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
-                    }
-                    else
-                    {
-                        <span class="sort-indicator text-muted">⇅</span>
-                    }
-                </a>
-            </th>
-            <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
-                    @Lang.Price (PLN)
-                    @if (sortBy == nameof(ProductDto.Price))
-                    {
-                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
-                    }
-                    else
-                    {
-                        <span class="sort-indicator text-muted">⇅</span>
-                    }
-                </a>
-            </th>
-            <th>
-                <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
-                    @Lang.ExpirationDate
-                    @if (sortBy == nameof(ProductDto.ExpirationDate))
-                    {
-                        <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
-                    }
-                    else
-                    {
-                        <span class="sort-indicator text-muted">⇅</span>
-                    }
-                </a>
-            </th>
-            <th>@Lang.Actions</th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        @foreach (var item in Model.Items)
-        {
-            var isExpiringSoon = item.ExpirationDate <= DateTime.Now.AddDays(3).Date && item.ExpirationDate >= DateTime.Now.Date;
-            var isExpired = item.ExpirationDate < DateTime.Now.Date;
-
-            <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
-                <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                <td>@(TranslationHelper.GetTranslatedValue(item.CategoryTranslationKey) ?? item.CategoryName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Quantity) @item.Unit.GetDisplayName()</td>
-                <td>@Html.DisplayFor(modelItem => item.Price)</td>
-                <td>
-                    @item.ExpirationDate.ToString("dd-MM-yyyy")
-                    @if (isExpired)
-                    {
-                        <span class="text-danger ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-danger-tooltip" data-bs-title="@Lang.ProductExpired">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                        </span>
-                    }
-                    else if (isExpiringSoon)
-                    {
-                        <span class="text-warning ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-warning-tooltip" data-bs-title="@Lang.ProductExpiringSoon">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                        </span>
-                    }
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">@Lang.Edit</a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">@Lang.Delete</a>
-                </td>
+@if (Model.Items.Any())
+{
+    <table class="table table-hover">
+        <caption class="visually-hidden">@Lang.ProductsTableCaption</caption>
+        <thead>
+            <tr class="table-light">
+                <th>
+                    <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Name), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
+                        @Lang.Name
+                        @if (sortBy == nameof(ProductDto.Name))
+                        {
+                            <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
+                        }
+                        else
+                        {
+                            <span class="sort-indicator">⇅</span>
+                        }
+                    </a>
+                </th>
+                <th>
+                    <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Description), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
+                        @Lang.Description
+                        @if (sortBy == nameof(ProductDto.Description))
+                        {
+                            <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
+                        }
+                        else
+                        {
+                            <span class="sort-indicator">⇅</span>
+                        }
+                    </a>
+                </th>
+                <th>
+                    @Lang.Category
+                </th>
+                <th>
+                    <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Quantity), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
+                        @Lang.Quantity
+                        @if (sortBy == nameof(ProductDto.Quantity))
+                        {
+                            <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
+                        }
+                        else
+                        {
+                            <span class="sort-indicator">⇅</span>
+                        }
+                    </a>
+                </th>
+                <th>
+                    <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.Price), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
+                        @Lang.Price (PLN)
+                        @if (sortBy == nameof(ProductDto.Price))
+                        {
+                            <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
+                        }
+                        else
+                        {
+                            <span class="sort-indicator">⇅</span>
+                        }
+                    </a>
+                </th>
+                <th>
+                    <a class="text-dark p-0 text-decoration-none" href="@Url.Action("Index", new { pageNumber = pageNumber, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = nameof(ProductDto.ExpirationDate), sortDirection = nextSortDirection, categoryIds = selectedCategoryIds })">
+                        @Lang.ExpirationDate
+                        @if (sortBy == nameof(ProductDto.ExpirationDate))
+                        {
+                            <span class="sort-indicator">@((sortDirection == "Ascending") ? "▲" : "▼")</span>
+                        }
+                        else
+                        {
+                            <span class="sort-indicator">⇅</span>
+                        }
+                    </a>
+                </th>
+                <th>@Lang.Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <!-- Pagination Controls on the Left -->
-    <nav aria-label="Pagination">
-        <ul class="pagination pagination-sm mb-0">
-            <!-- Previous Button -->
-            <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Lang.Previous</a>
-            </li>
-
-            <!-- First Page -->
-            @if (startPage > 1)
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var item in Model.Items)
             {
-                <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">1</a>
+                var isExpiringSoon = item.ExpirationDate <= DateTime.Now.AddDays(3).Date && item.ExpirationDate >= DateTime.Now.Date;
+                var isExpired = item.ExpirationDate < DateTime.Now.Date;
+
+                <tr class="@(isExpired ? "table-danger" : (isExpiringSoon ? "table-warning" : ""))">
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@(TranslationHelper.GetTranslatedValue(item.CategoryTranslationKey) ?? item.CategoryName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Quantity) @item.Unit.GetDisplayName()</td>
+                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                    <td>
+                        @item.ExpirationDate.ToString("dd-MM-yyyy")
+                        @if (isExpired)
+                        {
+                            <span class="text-danger ms-2"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="top"
+                                  data-bs-custom-class="custom-danger-tooltip"
+                                  data-bs-title="@Lang.ProductExpired"
+                                  aria-label="@Lang.ProductExpired"
+                                  role="img">
+                                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                            </span>
+                        }
+                        else if (isExpiringSoon)
+                        {
+                            <span class="text-warning ms-2"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="top"
+                                  data-bs-custom-class="custom-warning-tooltip"
+                                  data-bs-title="@Lang.ProductExpiringSoon"
+                                  aria-label="@Lang.ProductExpiringSoon"
+                                  role="img">
+                                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                            </span>
+                        }
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">@Lang.Edit</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('@Lang.DeleteProductConfirmationMessage')">@Lang.Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info" role="alert">
+        @Lang.NoProductsFound
+    </div>
+}
+
+@if (Model.Items.Any())
+{
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <nav aria-label="Pagination">
+            <ul class="pagination pagination-sm mb-0">
+                <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber - 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Lang.Previous</a>
                 </li>
-                @if (startPage > 2)
+
+                @if (startPage > 1)
                 {
-                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">1</a>
+                    </li>
+                    @if (startPage > 2)
+                    {
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    }
                 }
-            }
 
-            <!-- Main Page Links (Up to 3 Pages) -->
-            @for (var i = startPage; i <= endPage; i++)
-            {
-                <li class="page-item @(pageNumber == i ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@i</a>
-                </li>
-            }
-
-            <!-- Last Page -->
-            @if (endPage < Model.TotalPages)
-            {
-                @if (endPage < Model.TotalPages - 1)
+                @for (var i = startPage; i <= endPage; i++)
                 {
-                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                    <li class="page-item @(pageNumber == i ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@i</a>
+                    </li>
                 }
-                <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = Model.TotalPages, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Model.TotalPages</a>
+
+                @if (endPage < Model.TotalPages)
+                {
+                    @if (endPage < Model.TotalPages - 1)
+                    {
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    }
+                    <li class="page-item">
+                        <a class="page-link" href="@Url.Action("Index", new { pageNumber = Model.TotalPages, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Model.TotalPages</a>
+                    </li>
+                }
+
+                <li class="page-item @(pageNumber >= Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Lang.Next</a>
                 </li>
-            }
+            </ul>
+        </nav>
 
-            <!-- Next Button -->
-            <li class="page-item @(pageNumber >= Model.TotalPages ? "disabled" : "")">
-                <a class="page-link" href="@Url.Action("Index", new { pageNumber = pageNumber + 1, pageSize = pageSize, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@Lang.Next</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Page Size Selection on the Right -->
-    <nav aria-label="Page size">
-        <ul class="pagination pagination-sm mb-0">
-            <li class="me-2 d-flex align-items-center">
-                <span>@Lang.ShowPerPage:</span>
-            </li>
-            @foreach (var size in @PaginationDefaults.AllowedPageSizes)
-            {
-                <li class="page-item @(pageSize == size ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = size, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@size</a>
+        <nav aria-label="Page size">
+            <ul class="pagination pagination-sm mb-0">
+                <li class="me-2 d-flex align-items-center">
+                    <span>@Lang.ShowPerPage:</span>
                 </li>
-            }
-        </ul>
-    </nav>
-</div>
+                @foreach (var size in PaginationDefaults.AllowedPageSizes)
+                {
+                    <li class="page-item @(pageSize == size ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { pageNumber = 1, pageSize = size, searchPhrase = searchPhrase, sortBy = sortBy, sortDirection = sortDirection, categoryIds = selectedCategoryIds })">@size</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+}
 
-<!-- Modal window with filters -->
 <div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form method="get" asp-action="Index">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="filtersModalLabel">@Lang.Filters</h5>
+                    <div class="modal-title h5 mb-0" id="filtersModalLabel">@Lang.Filters</div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="@Lang.Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Category filter -->
-                    <h6>@Lang.Category</h6>
-                    <div class="list-group overflow-auto" id="categoryFilterList" aria-labelledby="categoryFilterSection">
-                    </div>
+                    <fieldset>
+                        <legend id="categoryFilterSection" class="h6">@Lang.Category</legend>
+                        <div class="list-group overflow-auto" id="categoryFilterList" aria-labelledby="categoryFilterSection">
+                        </div>
+                    </fieldset>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="SearchPhrase" value="@searchPhrase" />

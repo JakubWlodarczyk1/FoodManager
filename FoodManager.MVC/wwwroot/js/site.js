@@ -132,3 +132,19 @@ $(document).ready(function () {
 // Initialize all tooltips
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+const applyTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+};
+
+$(document).ready(function () {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    applyTheme(savedTheme);
+
+    $(".js-theme-option").on("click", function () {
+        const theme = $(this).data("theme");
+        applyTheme(theme);
+    });
+});
+

@@ -8,7 +8,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName">
+<html lang="@Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName" data-theme="light">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,8 +18,17 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FoodManager.MVC.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/toastr.js/toastr.css" />
+
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("theme") || "light";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+        })();
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">@Lang.SkipToMainContent</a>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -31,19 +40,54 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(controller == "Home" && action == "Index"? "active" : string.Empty)" asp-area="" asp-controller="Home" asp-action="Index">@Lang.HomePage</a>
+                            <a class="nav-link text-dark @(controller == "Product" && action == "Index" ? "active" : string.Empty)"
+                               asp-area=""
+                               asp-controller="Product"
+                               asp-action="Index">@Lang.Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(controller == "Product" && action == "Index"? "active" : string.Empty)" asp-area="" asp-controller="Product" asp-action="Index">@Lang.Products</a>
+                            <a class="nav-link text-dark @(controller == "Product" && action == "Create" ? "active" : string.Empty)"
+                               asp-area=""
+                               asp-controller="Product"
+                               asp-action="Create">@Lang.AddProduct</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(controller == "Product" && action == "Create"? "active" : string.Empty)" asp-area="" asp-controller="Product" asp-action="Create">@Lang.AddProduct</a>
+                            <a class="nav-link text-dark @(controller == "Analytics" && action == "Index" ? "active" : string.Empty)"
+                               asp-area=""
+                               asp-controller="Analytics"
+                               asp-action="Index">@Lang.Analytics</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark @(controller == "Analytics" && action == "Index"? "active" : string.Empty)" asp-area="" asp-controller="Analytics" asp-action="Index">@Lang.Analytics</a>
-                        </li>
+                        @if (User.IsInRole(FoodManager.Domain.Constants.Roles.Admin))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin" asp-action="Index">@Lang.AdminPanel</a>
+                            </li>
+                        }
                     </ul>
-                    <ul class="navbar-nav text-end">
+                    <ul class="navbar-nav text-end align-items-center">
+                        <li class="nav-item dropdown me-2">
+                            <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @Lang.Theme
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <button type="button" class="dropdown-item js-theme-option" data-theme="light">
+                                        @Lang.LightTheme
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item js-theme-option" data-theme="dark">
+                                        @Lang.DarkTheme
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item js-theme-option" data-theme="contrast">
+                                        @Lang.ContrastTheme
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a class="nav-link text-dark dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 @if (Thread.CurrentThread.CurrentCulture.ToString() == "pl")
@@ -66,11 +110,11 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+<div class="container">
+    <main id="main-content" role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
 
     <footer class="border-top footer text-muted">
         <div class="container">

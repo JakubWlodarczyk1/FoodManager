@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FoodManager.Application.ApplicationUser;
+using FoodManager.Domain.Constants;
 using FoodManager.Domain.Interfaces;
 using MediatR;
 
@@ -20,7 +21,7 @@ namespace FoodManager.Application.Product.Commands.EditProduct
                 return;
 
             var user = userContext.GetCurrentUser();
-            var isEditable = product.CreatedById == user.Id;
+            var isEditable = product.CreatedById == user.Id || user.IsInRole(Roles.Admin);
 
             if (!isEditable)
                 return;

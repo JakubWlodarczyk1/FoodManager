@@ -124,6 +124,69 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin panel.
+        /// </summary>
+        public static string AdminPanel {
+            get {
+                return ResourceManager.GetString("AdminPanel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage users and products in the system..
+        /// </summary>
+        public static string AdminPanelDescription {
+            get {
+                return ResourceManager.GetString("AdminPanelDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse, edit and delete products of all users..
+        /// </summary>
+        public static string AdminProductsDescription {
+            get {
+                return ResourceManager.GetString("AdminProductsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All products table in the system.
+        /// </summary>
+        public static string AdminProductsTableCaption {
+            get {
+                return ResourceManager.GetString("AdminProductsTableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse users and block access to the system..
+        /// </summary>
+        public static string AdminUsersDescription {
+            get {
+                return ResourceManager.GetString("AdminUsersDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All products.
+        /// </summary>
+        public static string AllProducts {
+            get {
+                return ResourceManager.GetString("AllProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of all products in the system..
+        /// </summary>
+        public static string AllProductsDescription {
+            get {
+                return ResourceManager.GetString("AllProductsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analytics.
         /// </summary>
         public static string Analytics {
@@ -142,11 +205,38 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to product list.
         /// </summary>
         public static string BackToProductList {
             get {
                 return ResourceManager.GetString("BackToProductList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Block.
+        /// </summary>
+        public static string Block {
+            get {
+                return ResourceManager.GetString("Block", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocked.
+        /// </summary>
+        public static string Blocked {
+            get {
+                return ResourceManager.GetString("Blocked", resourceCulture);
             }
         }
         
@@ -214,6 +304,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear filters.
+        /// </summary>
+        public static string ClearFilters {
+            get {
+                return ResourceManager.GetString("ClearFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Click here to logout.
         /// </summary>
         public static string ClickHereToLogout {
@@ -268,6 +367,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to High Contrast.
+        /// </summary>
+        public static string ContrastTheme {
+            get {
+                return ResourceManager.GetString("ContrastTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created product category: {0}.
         /// </summary>
         public static string CreateCategorySuccessNotification {
@@ -313,6 +421,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string DarkTheme {
+            get {
+                return ResourceManager.GetString("DarkTheme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Date {
@@ -327,6 +444,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string DateISOValidationMessage {
             get {
                 return ResourceManager.GetString("DateISOValidationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date range.
+        /// </summary>
+        public static string DateRange {
+            get {
+                return ResourceManager.GetString("DateRange", resourceCulture);
             }
         }
         
@@ -556,6 +682,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Table of expiring products count.
+        /// </summary>
+        public static string ExpiringProductsTableCaption {
+            get {
+                return ResourceManager.GetString("ExpiringProductsTableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie udało się pobrać danych analitycznych.
         /// </summary>
         public static string FetchError {
@@ -651,6 +786,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string InvalidUserName {
             get {
                 return ResourceManager.GetString("InvalidUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string LightTheme {
+            get {
+                return ResourceManager.GetString("LightTheme", resourceCulture);
             }
         }
         
@@ -799,11 +943,29 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have no access to this resource.
         /// </summary>
         public static string NoAccessMessage {
             get {
                 return ResourceManager.GetString("NoAccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No products matching the search or filter criteria were found..
+        /// </summary>
+        public static string NoProductsFound {
+            get {
+                return ResourceManager.GetString("NoProductsFound", resourceCulture);
             }
         }
         
@@ -1033,6 +1195,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User products table.
+        /// </summary>
+        public static string ProductsTableCaption {
+            get {
+                return ResourceManager.GetString("ProductsTableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile.
         /// </summary>
         public static string Profile {
@@ -1204,6 +1375,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Skip to main content.
+        /// </summary>
+        public static string SkipToMainContent {
+            get {
+                return ResourceManager.GetString("SkipToMainContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to snacks.
         /// </summary>
         public static string Snacks {
@@ -1258,6 +1438,15 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string Theme {
+            get {
+                return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
         public static string To {
@@ -1281,6 +1470,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string TotalProductsPrice {
             get {
                 return ResourceManager.GetString("TotalProductsPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unblock.
+        /// </summary>
+        public static string Unblock {
+            get {
+                return ResourceManager.GetString("Unblock", resourceCulture);
             }
         }
         
@@ -1411,6 +1609,24 @@ namespace FoodManager.Application.Resources.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of system users and access management..
+        /// </summary>
+        public static string UsersListDescription {
+            get {
+                return ResourceManager.GetString("UsersListDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to vegetables.
         /// </summary>
         public static string Vegetables {
@@ -1443,6 +1659,15 @@ namespace FoodManager.Application.Resources.Localizations {
         public static string WelcomeToFoodManager {
             get {
                 return ResourceManager.GetString("WelcomeToFoodManager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

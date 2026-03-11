@@ -4,6 +4,7 @@
 @using FoodManager.Application.Resources.Localizations
 @using FoodManager.Infrastructure.Localization
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using FoodManager.MVC.Models
 
 @model EditProductCommand
 
@@ -11,14 +12,21 @@
     ViewData["Title"] = @Lang.Edit;
 }
 
+@await Html.PartialAsync("_Breadcrumbs", new List<BreadcrumbItemViewModel>
+{
+    new() { Title = Lang.HomePage, Url = Url.Action("Index", "Home") },
+    new() { Title = Lang.Products, Url = Url.Action("Index", "Product") },
+    new() { Title = Lang.EditProduct }
+})
+
 <h1>@Lang.EditProduct</h1>
 
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" asp-antiforgery="true">
             <div class="form-group mb-3">
-                <label class="control-label" asp-for="Name">@Html.DisplayNameFor(model => model.Name)</label>
-                <input class="form-control" type="text" asp-for="Name" />
+                <label class="control-label" for="Name">@Lang.Name</label>
+                <input class="form-control" type="text" id="Name" name="Name" value="@Model.Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
@@ -29,21 +37,32 @@
             </div>
 
             <div class="form-group mb-3">
-                <label class="control-label">@Html.DisplayNameFor(model => model.CategoryName)</label>
+                <label class="control-label" for="dropdownMenuButton">@Html.DisplayNameFor(model => model.CategoryName)</label>
                 <div class="dropdown">
-                    <button class="btn btn-secondary d-flex justify-content-between align-items-center w-100 overflow-auto" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="text-start" id="dropdownMenuButtonText">@(TranslationHelper.GetTranslatedValue(Model.CategoryTranslationKey) ?? Model.CategoryName ?? Lang.ChooseCategory)</span>
+                    <button class="btn btn-secondary d-flex justify-content-between align-items-center w-100 overflow-auto"
+                            type="button"
+                            id="dropdownMenuButton"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <span class="text-start" id="dropdownMenuButtonText">
+                            @(TranslationHelper.GetTranslatedValue(Model.CategoryTranslationKey) ?? Model.CategoryName ?? Lang.ChooseCategory)
+                        </span>
                         <span class="ms-auto dropdown-toggle"></span>
                     </button>
+
                     <div class="dropdown-menu p-2 w-100 overflow-auto" id="selectCategory" aria-labelledby="dropdownMenuButton">
+                        <label for="dropdownSearch" class="visually-hidden">@Lang.Search</label>
                         <input type="text" class="form-control mb-2" placeholder="@Lang.Search..." id="dropdownSearch">
+
                         <ul class="list-unstyled mb-0" id="dropdownOptions">
                         </ul>
+
                         <li><hr class="dropdown-divider-bg"></li>
                         <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#createProductCategoryModal">@Lang.AddNew +</a>
                         <a class="dropdown-item" data-value="null" id="resetCategory">@Lang.ResetCategory</a>
                     </div>
                 </div>
+
                 <input type="hidden" asp-for="CategoryId" id="selectedCategory">
                 <input type="hidden" asp-for="CategoryTranslationKey" id="categoryTranslationKey">
                 <input type="hidden" asp-for="CategoryName" id="categoryName">
@@ -52,12 +71,13 @@
 
             <div class="form-group mb-3">
                 <label class="control-label" asp-for="Quantity">@Html.DisplayNameFor(model => model.Quantity)</label>
+                <label class="visually-hidden" for="Unit">@Lang.Unit</label>
+
                 <div class="input-group">
                     <input class="form-control" type="number" asp-for="Quantity" step="any" min="1" max="10000" inputmode="numeric" />
-                    <span>
-                        <select class="form-select" asp-for="Unit" asp-items="@UnitExtensions.GetUnitSelectList()"></select>
-                    </span>
+                    <select class="form-select flex-grow-0" style="width: 100px;" asp-for="Unit" asp-items="@UnitExtensions.GetUnitSelectList()"></select>
                 </div>
+
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
 
@@ -78,16 +98,29 @@
 
             <div class="form-group mb-3">
                 <input type="submit" value="@Lang.Save" class="btn btn-primary" />
-                <a class="btn btn-secondary" asp-action="Index">@Lang.BackToProductList</a>
+
+                @if (!string.IsNullOrWhiteSpace(Model.ReturnUrl))
+                {
+                    <a class="btn btn-secondary" href="@Model.ReturnUrl">@Lang.BackToProductList</a>
+                }
+                else
+                {
+                    <a class="btn btn-secondary" asp-action="Index">@Lang.BackToProductList</a>
+                }
             </div>
+
+            <input asp-for="ReturnUrl" type="hidden" />
+            <input asp-for="Id" type="hidden" />
         </form>
     </div>
 </div>
 
-<partial name="PartialViews/_CreateProductCategory" model ="new CreateProductCategoryCommand()" />
+<partial name="PartialViews/_CreateProductCategory" model="new CreateProductCategoryCommand()" />
 
 @section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <link rel="stylesheet" href="~/css/product/common.css">
     <script src="~/js/Product/edit.js"></script>
 }

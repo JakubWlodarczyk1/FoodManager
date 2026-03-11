@@ -579,4 +579,79 @@
   <data name="FetchError" xml:space="preserve">
     <value>Nie udało się pobrać danych analitycznych</value>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Block</value>
+  </data>
+  <data name="Unblock" xml:space="preserve">
+    <value>Unblock</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="AllProducts" xml:space="preserve">
+    <value>All products</value>
+  </data>
+  <data name="AdminPanelDescription" xml:space="preserve">
+    <value>Manage users and products in the system.</value>
+  </data>
+  <data name="AdminUsersDescription" xml:space="preserve">
+    <value>Browse users and block access to the system.</value>
+  </data>
+  <data name="AdminProductsDescription" xml:space="preserve">
+    <value>Browse, edit and delete products of all users.</value>
+  </data>
+  <data name="AllProductsDescription" xml:space="preserve">
+    <value>List of all products in the system.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="UsersListDescription" xml:space="preserve">
+    <value>List of system users and access management.</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="ContrastTheme" xml:space="preserve">
+    <value>High Contrast</value>
+  </data>
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>No products matching the search or filter criteria were found.</value>
+  </data>
+  <data name="ClearFilters" xml:space="preserve">
+    <value>Clear filters</value>
+  </data>
+  <data name="SkipToMainContent" xml:space="preserve">
+    <value>Skip to main content</value>
+  </data>
+  <data name="ProductsTableCaption" xml:space="preserve">
+    <value>User products table</value>
+  </data>
+  <data name="AdminProductsTableCaption" xml:space="preserve">
+    <value>All products table in the system</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Date range</value>
+  </data>
+  <data name="ExpiringProductsTableCaption" xml:space="preserve">
+    <value>Table of expiring products count</value>
+  </data>
 </root>

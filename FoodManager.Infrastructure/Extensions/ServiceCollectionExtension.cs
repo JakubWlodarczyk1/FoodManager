@@ -23,11 +23,13 @@ namespace FoodManager.Infrastructure.Extensions
                 configuration.GetConnectionString("FoodManager")));
 
             services.AddScoped<ProductCategorySeeder>();
+            services.AddScoped<IdentitySeeder>();
 
             services.AddDefaultIdentity<IdentityUser>(options =>
                 {
                     options.Stores.MaxLengthForKeys = 450;
                 })
+                .AddRoles<IdentityRole>()
                 .AddErrorDescriber<LocalizedIdentityErrorDescriber>()
                 .AddEntityFrameworkStores<FoodManagerDbContext>();
 

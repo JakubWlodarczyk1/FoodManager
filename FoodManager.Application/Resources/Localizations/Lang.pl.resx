@@ -579,4 +579,79 @@
   <data name="FetchError" xml:space="preserve">
     <value>Failed to load analytical data</value>
   </data>
+  <data name="Users" xml:space="preserve">
+    <value>Użytkownicy</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Panel administratora</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="Block" xml:space="preserve">
+    <value>Zablokuj</value>
+  </data>
+  <data name="Unblock" xml:space="preserve">
+    <value>Odblokuj</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Zablokowany</value>
+  </data>
+  <data name="AllProducts" xml:space="preserve">
+    <value>Wszystkie produkty</value>
+  </data>
+  <data name="AdminPanelDescription" xml:space="preserve">
+    <value>Zarządzanie użytkownikami i produktami w systemie.</value>
+  </data>
+  <data name="AdminUsersDescription" xml:space="preserve">
+    <value>Przeglądaj użytkowników i blokuj dostęp do systemu.</value>
+  </data>
+  <data name="AdminProductsDescription" xml:space="preserve">
+    <value>Przeglądaj, edytuj i usuwaj produkty wszystkich użytkowników.</value>
+  </data>
+  <data name="AllProductsDescription" xml:space="preserve">
+    <value>Lista wszystkich produktów w systemie.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Powrót</value>
+  </data>
+  <data name="UsersListDescription" xml:space="preserve">
+    <value>Lista użytkowników systemu i zarządzanie dostępem.</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Motyw</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Jasny</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Ciemny</value>
+  </data>
+  <data name="ContrastTheme" xml:space="preserve">
+    <value>Kontrastowy</value>
+  </data>
+  <data name="NoProductsFound" xml:space="preserve">
+    <value>Nie znaleziono produktów spełniających kryteria wyszukiwania lub filtrowania.</value>
+  </data>
+  <data name="ClearFilters" xml:space="preserve">
+    <value>Wyczyść filtry</value>
+  </data>
+  <data name="SkipToMainContent" xml:space="preserve">
+    <value>Przejdź do treści</value>
+  </data>
+  <data name="ProductsTableCaption" xml:space="preserve">
+    <value>Tabela produktów użytkownika</value>
+  </data>
+  <data name="AdminProductsTableCaption" xml:space="preserve">
+    <value>Tabela wszystkich produktów w systemie</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Zakres dat</value>
+  </data>
+  <data name="ExpiringProductsTableCaption" xml:space="preserve">
+    <value>Tabela liczby produktów kończących termin</value>
+  </data>
 </root>

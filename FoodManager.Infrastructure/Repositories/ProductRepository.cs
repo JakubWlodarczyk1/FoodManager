@@ -144,5 +144,47 @@ namespace FoodManager.Infrastructure.Repositories
 
             return data.Select(x => (x.Date, x.Count)).ToList();
         }
+
+        public async Task<Product?> GetPublicById(int id)
+        {
+            return await dbContext.Products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<(IEnumerable<Product>, int)> GetProductsMatchingSearch(string? searchPhrase, int pageNumber, int pageSize, string? sortBy, SortDirection sortDirection, int?[]? categoryIds)
+        {
+            var searchPhraseLower = searchPhrase?.ToLower();
+
+            var baseQuery = dbContext.Products
+                .Where(p =>
+                    (categoryIds == null || categoryIds.Contains(p.CategoryId)) &&
+                    (
+                        searchPhraseLower == null ||
+                        (
+                            p.Name.ToLower().Contains(searchPhraseLower) ||
+                            (p.Description != null && p.Description.ToLower().Contains(searchPhraseLower))
+                        )
+                    )
+                );
+
+            var totalCount = await baseQuery.CountAsync();
+
+            if (sortBy != null)
+            {
+                var selectedColumn = ProductSortingConfiguration.ColumnsSelector[sortBy];
+                baseQuery = sortDirection == SortDirection.Ascending
+                    ? baseQuery.OrderBy(selectedColumn)
+                    : baseQuery.OrderByDescending(selectedColumn);
+            }
+
+            var products = await baseQuery
+                .Skip(pageSize * (pageNumber - 1))
+                .Take(pageSize)
+                .Include(p => p.Category)
+                .ToListAsync();
+
+            return (products, totalCount);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FoodManager.Application.ApplicationUser;
+using FoodManager.Domain.Constants;
 using FoodManager.Domain.Interfaces;
 using MediatR;
 
@@ -19,7 +20,7 @@ namespace FoodManager.Application.Product.Commands.DeleteProduct
                 return;
 
             var user = userContext.GetCurrentUser();
-            var canDelete = product.CreatedById == user.Id;
+            var canDelete = product.CreatedById == user.Id || user.IsInRole(Roles.Admin);
 
             if (!canDelete)
                 return;
